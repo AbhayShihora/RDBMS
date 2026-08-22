@@ -1,0 +1,883 @@
+//Data BAse
+("use MCAE_27")
+// --------------------------------------------------------------------
+//Exercise-1
+//Table
+db.createCollection("Teacher_Master")
+//Data Insert
+//Record-1
+    db.Teacher_Master.insert(
+        {
+            _id:1,
+            Name:"Abhay Shihora",
+            Age:21,
+            Subject:["Gujarati","Sanskrit"],
+            DOB:"14-Oct-2004",
+            Gender:"Male",
+            Salary:20000,
+            City:"Ahmedabad"
+        }
+    )
+//Record-2
+    db.Teacher_Master.insert(
+        {
+            _id:2,
+            Name:"Darshan Shah",
+            Age:22,
+            Subject:["Hindi","English"],
+            DOB:"04-Oct-2004",
+            Gender:"Male",
+            Salary:25000,
+            City:"Ahmedabad"
+        }
+    )
+//Record-3
+    db.Teacher_Master.insert(
+        {
+            _id:3,
+            Name:"Anil Bambhaniya",
+            Age:25,
+            Subject:["Marathi"],
+            DOB:"04-Oct-2004",
+            Gender:"Male",
+            Salary:25000,
+            City:"Ahmedabad"
+        }
+    )
+//Record-4
+    db.Teacher_Master.insert(
+        {
+            _id:4,
+            Name:"Khushal Div",
+            Age:30,
+            Subject:["Sanskrit","English"],
+            DOB:"15-Jan-2005",
+            Gender:"Male",
+            Salary:40000,
+            City:"Div"
+        }
+    )
+//Record-5
+    db.Teacher_Master.insert(
+        {
+            _id:5,
+            Name:"Meera Patel",
+            Age:45,
+            Subject:["Maths","English"],
+            DOB:"01-Jan-1980",
+            Gender:"Female",
+            Salary:61000,
+            City:"Gandhinagar"
+        }
+    )
+//Record-6
+    db.Teacher_Master.insert(
+        {
+            _id:6,
+            Name:"Dhrshti Dave",
+            Age:32,
+            Subject:["Hindi","Gujarati"],
+            DOB:"05-May-1992",
+            Gender:"Female",
+            Salary:43000,
+            City:"Surat"
+        }
+    )
+//Record-7
+    db.Teacher_Master.insert(
+        {
+            _id:7,
+            Name:"Rajnikant Trivedi",
+            Age:26,
+            Subject:["Hindi","Gujarati"],
+            DOB:"21-Aug-1999",
+            Gender:"Male",
+            Gender:53000,
+            City:"Bhavnagar"
+        }
+    )
+
+//Display Name, Subject, Gender and Salary. 
+db.Teacher_Master.find({},{_id:0,Name:1,Subject:1,Gender:1,Salary:1})
+
+//3. Display teacher, which are from the city “Ahmedabad”. 
+db.Teacher_Master.find({City:"Ahmedabad"})
+
+//4. Display the teacher id, name, city and DOB. 
+
+// 5. Display the teachers whose gender is female and teach either “Hindi” or “English” subject. 
+db.Teacher_Master.find({Gender:"Female"},{})
+db.Teacher_Master.find({$or:[{Subject:"Hindi"},{Subject:"English"}]},{})
+db.Teacher_Master.find({Gender:"Female",$or:[{Subject:"Hindi"},{Subject:"English"}]},{})
+
+// 6. Update all those documents where name of teacher is “Anil” with the new value of subject as “English”. 
+db.Teacher_Master.find({Name:"Anil Bambhaniya"})
+db.Teacher_Master.find({Name:"Anil Bambhaniya", Subject:"English"})
+db.Teacher_Master.update({Name:"Anil Bambhaniya"},{$set:{Subject:"English"}})
+
+// 7. Delete data of all those teachers who were born on date 1st January 1980. 
+db.Teacher_Master.find({DOB:"01-Jan-1980"})
+db.Teacher_Master.remove({DOB:"01-Jan-1980"})
+
+// 8. Remove field age. 
+db.Teacher_Master.updateMany({},{$unset:{Age:""}})
+
+// 9. Display the teachers that do not teach “English” subject and their salary is more than 30000. 
+db.Teacher_Master.find({Subject:{$ne:"English"}})
+db.Teacher_Master.find({Salary:{$gt:30000}})
+db.Teacher_Master.find({$and:[{Subject:{$ne:"English"}},{Salary:{$gt:30000}}]})
+
+// 10. Find all the teachers having gender “Male” and display salary for them. 
+db.Teacher_Master.find({Gender:"Male"},{Salary:1,_id:0})
+db.Teacher_Master.find({Gender:"Female"},{Salary:1,_id:0})
+
+
+
+// -------------------------------------------------------------------------------
+//Exercise-2
+//Table
+db.createCollection("EMPLOYEE_MASTER")
+//Records
+// 1. Insert 7 documents into the above collection.
+db.Employee_Master.insertMany([
+{
+    _id:1,
+    "Empno":1234,
+    "Name":"Abhay Shihora",
+    "Des":"Manager",
+    "DOJ":"12-Dec-2009",
+    "Dept":"Sales",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["german","Writting"]
+},
+{
+    _id:2,
+    "Empno":3321,
+    "Name":"Sonal",
+    "Des":"J.Clerk",
+    "DOJ":"21-Jan-2015",
+    "Dept":"Purchase",
+    "Gender":"Female",
+    "Salary":21000,
+    "Skill":["Learn New","Speaking"]
+},
+{
+    _id:3,
+    "Empno":8877,
+    "Name":"Bob",
+    "Dept":"Facilities",
+    "Des":"Worker",
+    "DOJ":"23-Jun-2021",
+    "Gender":"Male",
+    "Salary":14000,
+    "Skill":["Movie","History"]
+},
+{
+    _id:4,
+    "Empno":4323,
+    "Name":"Cathy",
+    "Dept":"Sales",
+    "Des":"Manager",
+    "DOJ":"25-May-2018",
+    "Gender":"Female",
+    "Salary":32000,
+    "Skill":["Learn History","Watch Movie"]
+},
+{
+    _id:5,
+    "Empno":4453,
+    "Name":"Mike",
+    "Dept":"HR",
+    "Des":"S.Clerk",
+    "DOJ":"31-Jan-2024",
+    "Gender":"Male",
+    "Salary":27000,
+    "Skill":["New Learn","Coding"]
+},
+{
+    _id:6,
+    "Empno":1234,
+    "Name":"Jenny",
+    "Dept":"HR",
+    "Des":"CEO",
+    "DOJ":"22-Aug-2015",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["Testing Code","Writting"]
+},
+{
+    _id:7,
+    "Empno":5463,
+    "Name":"Jerry",
+    "Dept":"Purchase",
+   "Des":"Worker",
+    "DOJ":"20-Nov-2023",
+    "Gender":"Female",
+    "Salary":29500,
+    "Skill":["Speaking","Writting"]
+},
+{
+    _id:8,
+    "Empno":6566,
+    "Name":"Darshan",
+    "Dept":"HR",
+    "Des":"Scientist",
+    "DOJ":"22-Aug-2015",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["Testing Code","Writting"]
+},
+{
+    _id:9,
+    "Empno":3423,
+    "Name":"Khushal",
+    "Dept":"Purchase",
+   "Des":"Engineer",
+    "DOJ":"20-Nov-2023",
+    "Gender":"Female",
+    "Salary":29500,
+    "Skill":["Speaking","Writting"]
+}]);
+
+// 2. Display Name, Department, Gender and Salary.
+db.Employee_Master.find({},{Name:1,Dept:1,Gender:1,Salary:1,_id:0})
+
+// 3. Display the list of employees from the department “HR”.
+// 4. Display the employee id, name, department and DOB.
+// 5. Display the employees whose gender is female and designation either “Engineer” or “Scientist”.
+db.Employee_Master.find({Gender:"Female"})
+db.Employee_Master.find({$or:[{Des:"Engineer"},{Des:"Scientist"}]})
+db.Employee_Master.find({$and:[{Gender:"Female"},{$or:[{Des:"Engineer"},{Des:"Scientist"}]}]})
+
+// 6. Update all those documents where name of employee is “Akash” with the new value of designation as “Engineer”.
+db.Employee_Master.find({Name:"Sonal"},{})
+db.Employee_Master.update({Name:"Sonal"},{$set:{Des:"Engineer"}})
+
+// 7. Delete all those documents where DOJ is  1st January 1999.
+db.Employee_Master.find({DOJ:"21-Jan-2015"})
+db.Employee_Master.remove({DOJ:"21-Jan-2015"})
+
+// 8. Display the employees whose salary is greater than 25000 and have skills Java or PHP.
+db.Employee_Master.find({Salary:{$gt:25000}})
+db.Employee_Master.find({Skill:{$in:["Coding","Movie"]}})
+db.Employee_Master.find({$and:[{Salary:{$gt:25000}},{Skill:{$in:["Coding","Movie"]}}]})
+
+// 9. Find all the employees having designation “Engineer” and display salary for them.
+db.Employee_Master.find({Des:"Engineer"},{_id:0,Salary:1})
+
+// 10. Display only those documents where the name of employee is “Amit” and designation is “Accountant”.
+db.Employee_Master.find({$and:[{Name:"Abhay Shihora"},{Des:"Manager"}]})
+
+
+
+// -------------------------------------------------------------------------------
+//Exercise-3
+//Table
+db.createCollection("Student_Master")
+//Records
+// a) Insert 10 Records in the database.
+
+db.Student_Master.insert(
+{
+    _id:1,
+    RollNo:27, 
+    Sname:"Abhay Shihora",
+    Grade:"I", 
+    Hobbies:["Learn New","Chess"], 
+    DOJ:"14-Oct-2025"
+})
+
+db.Student_Master.insert(
+{
+    _id:2,
+    RollNo:14, 
+    Sname:"Khushal Div",
+    Grade:"II", 
+    Hobbies:["Movie","Ridding"], 
+    DOJ:"12-Jan-2025"
+})
+
+db.Student_Master.insert(
+{
+    _id:3,
+    RollNo:53, 
+    Sname:"Darshan Shah",
+    Grade:"Iv", 
+    Hobbies:["Gaming","Football"], 
+    DOJ:"21-Feb-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:4,
+    RollNo:5, 
+    Sname:"Kamen Sutariya",
+    Grade:"I", 
+    Hobbies:["Singing","Chess"], 
+    DOJ:"23-Mar-2015"
+})
+
+db.Student_Master.insert(
+{
+    _id:5,
+    RollNo:47, 
+    Sname:"Akshay Patel",
+    Grade:"I", 
+    Hobbies:["Movie","Dansing"], 
+    DOJ:"31-Aug-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:6,
+    RollNo:22, 
+    Sname:"Meera Dave",
+    Grade:"VII", 
+    Hobbies:["Dancing","Chess"], 
+    DOJ:"02-Dec-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:7,
+    RollNo:7, 
+    Sname:"Khushali Tejani",
+    Grade:"IV", 
+    Hobbies:["Table Tennis","Chess"], 
+    DOJ:"12-Jun-2019"
+})
+
+db.Student_Master.insert(
+{
+    _id:8,
+    RollNo:1, 
+    Sname:"Karan",
+    Grade:"VI", 
+    Hobbies:["Vollyball","Gaming"], 
+    DOJ:"01-Jan-2022"
+})
+
+db.Student_Master.insert(
+{
+    _id:9,
+    RollNo:9, 
+    Sname:"Jyoti Shah",
+    Grade:"V", 
+    Hobbies:["Codding","Analysis"], 
+    DOJ:"14-Apr-2024"
+})
+db.Student_Master.insert(
+{
+    _id:10,
+    RollNo:27, 
+    Sname:"Bhavik Suthar",
+    Grade:"III", 
+    Hobbies:["Testing","Mind Game"], 
+    DOJ:"04-Nov-2024"
+})
+
+
+
+// b) Find the document where in the “StudName” has value “Akhay”.
+db.Student_Master.find({Sname:"Akshay Patel"})
+
+// c) Find all documents in proper (like tabular) format. (Without _Id field)
+db.Student_Master.find({},{_id:0}).pretty()
+
+// d) Retrieve only Student Name and Grade.
+db.Student_Master.find({},{Sname:1,Grade:1,_id:0})
+
+// e) Retrieve Student Name and Grade of student who is having _id column is 1.
+db.Student_Master.find({_id:1},{Sname:1,Grade:1,_id:0})
+
+// f) Add new field “Address” in Student collection.
+db.Student_Master.updateMany({},{$set:{Address:"Ahmedabad"}})
+
+// g) Find those documents where the Grade is set to ‘VII’.
+db.Student_Master.find({Grade:"VII"})
+
+// h) Find those documents where the Grade is not set to ‘VII’.
+db.Student_Master.find({Grade:{$ne:"VII"}})
+
+// i) Find those documents where the Hobbies is set to either ‘Chess’ or is set to ‘Dancing”.
+db.Student_Master.find({Hobbies:{$in:["Chess","Dancing"]}})
+
+// j) Find those documents where the Hobbies is set neither to ‘Chess’ nor is set to‘Dancing”. 
+db.Student_Master.find({Hobbies:{$nin:["Chess","Dancing"]}})
+
+//k) Find those documents where the student name begins with ‘M’.
+db.Student_Master.find({Sname:/M/},{})
+
+// l) Find those documents where the student name has an “e” in any position.
+db.Student_Master.find({Sname:/e/i})
+// m) Find those documents where the student name ends in “a”.
+db.Student_Master.find({Sname:/a$/i})
+
+// n) Find total number of documents.
+db.Student_Master.count()
+
+// o) Find total number of documents where Grade is ‘VII’.
+db.Student_Master.find({Grade:"VII"}).count()
+
+// p) Sort the documents in ascending order of student name.
+db.Student_Master.find().sort({Sname:1})
+db.Student_Master.find().sort({Sname:-1})
+
+// q) Display the last two records.
+db.Student_Master.find().sort({Sname:-1}).limit(2)
+
+// -------------------------------------------------------------------------------
+//Exercise-4
+//Table
+db.createCollection("Movie")
+//Records
+db.Movie.insert([
+{ "_id" : 1, "title" : "Fight Club", "writer" : "Chuck Palahniuk", "year" : 1999, "actors" : [ "Brad Pitt", "Edward Norton" ] },
+{ "_id" : 2, "title" : "Pulp Fiction", "writer" : "Quentin Tarantino", "year" : 2009, "actors" : [ "John Travolta", "Uma Thurman" ] },
+{ "_id" : 3, "title" : "Inglorious Hero", "writer" : "Quentin Tarantino", "year" : 2009, "actors" : [ "Brad Pitt", "Diane Kruger", "Eli Roth" ] },
+{ "_id" : 4, "title" : "The Hobbit: An unexpected Journey", "writer" : "J.R.R. Tolkein", "year" : 2012, "franchise" : "The Hobbit" },
+{ "_id" : 5, "title" : "The Hobbit: The Desolation of Smaug", "writer" : "J.R.R Tolkien", "year" : 2013, "franchise" : "The Hobbit" },
+{ "_id" : 6, "title" : "The Hobbit: The Battle of the Five Armies", "writer" : "J.R.R Tolkien", "year" : 2002, "franchise" : "The Hobbit", "synopsis" : "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness." },
+{ "_id" : 7, "title" : "Pee Wee Herman's Big Adventures" },
+{ "_id" : 8, "title" : "Avatar" }
+])
+
+// a) Retrieve all documents.
+db.Movie.find()
+
+// b) Retrieve all documents with Director set to "Quentin Tarantino".
+
+
+// c) Retrieve all documents where actors include "Brad Pitt".
+
+
+// d) Retrieve all movies released before the year 2000 or after 2010.
+db.Movie.find({$or:[{year:{$lt:2000}},{year:{$gt:2010}}]})
+
+// e) Add a synopsis to "The Hobbit: An Unexpected Journey”: "A reluctant hobbit,
+// Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves
+// to reclaim their mountain home - and the gold within it - from the dragon Smaug."
+db.Movie.find({title:"The Hobbit: An unexpected Journey"})
+db.Movie.update({title:"The Hobbit: An unexpected Journey"},{$set:{synopsis:"A reluctant hobbit, to reclaim their mountain home - and the gold within it - from the dragon Smaug."}})
+
+// f) Add a synopsis to "The Hobbit: The Desolation of Smaug”: "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."
+db.Movie.find({title:"The Hobbit: The Desolation of Smaug"})
+db.Movie.update({title:"The Hobbit: The Desolation of Smaug"},{$set:{synopsis:"The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."}})
+
+// g) Add an actor named "Samuel L. Jackson" to the movie "Pulp Fiction"
+db.Movie.find({title:"Pulp Fiction"})
+db.Movie.updateMany({title:"Pulp Fiction"},{$addToSet:{actors:"Samuel L. Jackson"}})
+
+// h) Find all movies that have a synopsis that contains the word "Bilbo".
+db.Movie.find({synopsis:/Bilbo/i})
+
+// i) Find all movies that have a synopsis that contains the word "Gandalf".
+db.Movie.find({synopsis:/Gandalf/i})
+
+// j) Find all movies that have a synopsis that contains the word "Bilbo" and not the word "Gandalf".
+db.Movie.find({synopsis:/Bilbo/i})  //Way-1
+db.Movie.find({synopsis:{$regex:"Bilbo",$options:"i"}}) //Way-2
+
+db.Movie.find({synopsis:{$not:/Gandalf/i}})  //Way-1
+db.Movie.find({synopsis:{$not:{$regex:"Gandalf", $options:"i"}}})   //way-2
+
+db.Movie.find({$and:[{synopsis:/Bilbo/i},{synopsis:{$not:/Gandalf/i}}]})   //Final
+
+// k) Find all movies that have a synopsis that contains the word "dwarves" or "hobbit"
+db.Movie.find({synopsis:/dwarves|hobbit/i})
+db.Movie.find({$or:[{synopsis:{$regex:"dwarves"}},{synopsis:{$regex:"hobbit"}}]})//way-2
+
+// l) Find all movies that have a synopsis that contains the word "gold" and "dragon".
+db.Movie.find({$or:[{synopsis:{$regex:"gold",$options:"i"}},{synopsis:{$regex:"dragon",$options:"i"}}]})
+
+// m) Delete the movie "Pee Wee Herman's Big Adventure”
+db.Movie.find({title:"Pee Wee Herman's Big Adventures"})
+db.Movie.remove({title:"Pee Wee Herman's Big Adventures"})
+
+
+// -------------------------------------------------------------------------------
+//Exercise-5
+//Table
+db.createCollection("Restaurants")
+//Records
+
+db.Restaurants.insert(
+{ "_id" : 1,
+ "RestaurantId" : 1, 
+ "RestaurantName" : "Mirch Masala",
+ "Grades" : [ "A", "A+" ],
+ "Cuisine" : "Kitchen King", 
+ "Address" : [ { "BuildingName" : "Himalaya",
+				"Street" : "Vastrapur",
+				"Area" : "Vastrapur Lake", 
+				"City" : "Ahmedabad",
+				"ZipCode" : 380052 } ],
+  "DateofEstablishment" : "1-Jan-2008", 
+  "Score" : 90, 
+  "Rating" : 4.9 
+  })
+
+db.Restaurants.insert([
+{
+	 "_id" : 2,
+	 "RestaurantId" : 2, 
+	 "RestaurantName" : "Jassi De Parathe",
+	 "Grades" : [ "A" ],
+	 "Cuisine" : "Kitchen Masala",
+	 "Address" : [ { "BuildingName" : "Sarkhej", "Street" : "Maninagar", "Area" : "Kankaria Lake", "City" : "Ahmedabad", "ZipCode" : 380052 } ], 
+	"DateofEstablishment" : "1-Jan-2008", 
+	"Score" : 40, 
+	"Rating" : 3.9 
+},
+
+{ "_id" : 3, "RestaurantId" : 4, "RestaurantName" : "Nini's Kitchen", "Grades" : [ "A" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Saket-II", "Street" : "Abc", "Area" : "Science City", "City" : "Baroda", "ZipCode" : 380051 } ], "DateofEstablishment" : "1-Jan-2008", "Score" : 40, "Rating" : 3.9 },
+
+{ "_id" : 4, "RestaurantId" : 3, "RestaurantName" : "Barbeque Nation", "Grades" : [ "C" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Memnagar", "Street" : "Maninagar", "Area" : "Iskon", "City" : "Surat", "ZipCode" : 380052 } ], "DateofEstablishment" : "1-Jan-2008", "Score" : 40, "Rating" : 3.9 },
+
+{ "_id" : 5, "RestaurantId" : 5, "RestaurantName" : "Nini's Kitchen", "Grades" : [ "A" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Saket-II", "Street" : "Abc", "Area" : "Science City", "City" : "Baroda", "ZipCode" : 380051 } ], "DateofEstablishment" : "1-Jan-2024", "Score" : 40, "Rating" : 3.9 }
+])
+
+
+
+db.Restaurants.find()
+// 1. Find the Restaurant Names, who have established after January 2010.
+db.Restaurants.find({DateofEstablishment:{$gte:"1-Jan-2010"}},{DateofEstablishment:1,RestaurantName:1})
+
+// 2. Find the restaurants that do not prepare Cuisine of “American”, and their Score is more than 70.
+db.Restaurants.find({Cuisine:{$ne:"American"}})
+db.Restaurants.find({Score:{$gt:70}})
+db.Restaurants.find({$and:[{Cuisine:{$ne:"American"}},{Score:{$gt:70}}]})
+
+// 3. Update the Rating of the restaurant “Mirch Masala”.
+db.Restaurants.find({RestaurantName:"Mirch Masala"})
+db.Restaurants.update({RestaurantName:"Mirch Masala"},{$inc:{Rating:-0.5}})
+
+// 4. Display the restaurants, which are located in “Ahmedabad”.
+db.Restaurants.find({"Address.City":"Ahmedabad"},{RestaurantName:1})
+
+// 5. Find the Restaurant Names and Cuisine, for those restaurants which contain ‘chen’ (Example: “Kitchen”) as the last three letters.
+db.Restaurants.find({RestaurantName:/chen/i},{RestaurantName:1,Cuisine:1})
+
+// 6. Find the Restaurant Id’s and Restaurant Names of those restaurants, which are situated in “Ahmedabad” (City) but not in “ISKON” (Area).
+db.Restaurants.find({"Address.City":"Ahmedabad"},{RestaurantName:1})
+db.Restaurants.find({"Address.Area":{$ne:"Iskon"}},{RestaurantName:1})
+db.Restaurants.find({$and:[{"Address.City":"Ahmedabad"},{"Address.Area":{$ne:"Iskon"}}]},{RestaurantName:1})
+
+// 7. Add a field “Borough” with value “Bronx”, for restaurants with _id: 3 and 4.
+db.Restaurants.find({$or:[{_id:3},{_id:4}]},{})
+db.Restaurants.updateMany({$or:[{_id:3},{_id:4}]},{$set:{Borough:"Bronx"}})
+
+// 8. Remove the field Cuisine for restaurants whose name is “Jassi De Paratha”.
+db.Restaurants.find({RestaurantName:"Jassi De Parathe"})
+db.Restaurants.update({RestaurantName:"Jassi De Parathe"},{$unset:{Cuisine:""}})
+
+// 9. Remove the document, with restaurant named “Barbeque Nation”.
+db.Restaurants.find({RestaurantName:"Barbeque Nation"})
+db.Restaurants.remove({RestaurantName:"Barbeque Nation"})
+
+
+
+// -------------------------------------------------------------------------------
+//Exercise-6
+//Table
+db.createCollection("HotelBookings")
+//Records
+db.HotelBookings.insert(
+{   HotelId:"HOT0395",
+    HotelName:"Royal Inn",
+    HotelType:["3 Star", "4 Star"],
+    TotNoOfRooms:40,
+    CityName:"New York",
+    DateOfRegistration:ISODate("2022-08-15T00:00:00Z"),
+    ContactNumber:"1234567890",
+    Ratings:4.5,
+    Owners:["John Doe","Jane Doe" ],
+    Bookings:[{
+                    BookingId:"B001",
+                    BookingDate:ISODate("2023-01-10T00:00:00Z"),
+                    RoomType:["Deluxe", "Twin"],
+                    CustomerName:"Alice Brown",
+                    NoOfRoomsBooked:2,
+                    Price:200,
+                    Discount:10
+                }]
+})
+
+
+db.HotelBookings.insert([
+  {   
+    HotelId: "HOT0396",
+    HotelName: "Ocean View Resort",
+    HotelType: ["4 Star", "5 Star"],
+    TotNoOfRooms: 120,
+    CityName: "Los Angeles",
+    DateOfRegistration: ISODate("2021-06-20T00:00:00Z"),
+    ContactNumber: "9876543210",
+    Ratings: 4.8,
+    Owners: ["Samuel Grant", "Emily Smith"],
+    Bookings: [
+      {
+        BookingId: "B002",
+        BookingDate: ISODate("2023-03-12T00:00:00Z"),
+        RoomType: ["Ocean View", "Suite"],
+        CustomerName: "George Williams",
+        NoOfRoomsBooked: 3,
+        Price: 350,
+        Discount: 15
+      }
+    ]
+  },
+  {   
+    HotelId: "HOT0397",
+    HotelName: "Mountain Peaks Lodge",
+    HotelType: ["3 Star", "4 Star"],
+    TotNoOfRooms: 80,
+    CityName: "Denver",
+    DateOfRegistration: ISODate("2020-11-05T00:00:00Z"),
+    ContactNumber: "5647382910",
+    Ratings: 4.2,
+    Owners: ["David Harris", "Anna Lee"],
+    Bookings: [
+      {
+        BookingId: "B003",
+        BookingDate: ISODate("2023-05-25T00:00:00Z"),
+        RoomType: ["Standard", "Family"],
+        CustomerName: "Sara Lee",
+        NoOfRoomsBooked: 1,
+        Price: 150,
+        Discount: 5
+      }
+    ]
+  },
+  {   
+    HotelId: "HOT0398",
+    HotelName: "Sunny Beach Hotel",
+    HotelType: ["2 Star", "3 Star"],
+    TotNoOfRooms: 55,
+    CityName: "Miami",
+    DateOfRegistration: ISODate("2022-02-10T00:00:00Z"),
+    ContactNumber: "7412589630",
+    Ratings: 3.9,
+    Owners: ["Michael Johnson", "Sarah Parker"],
+    Bookings: [
+      {
+        BookingId: "B004",
+        BookingDate: ISODate("2023-06-18T00:00:00Z"),
+        RoomType: ["Single", "Sea View"],
+        CustomerName: "Megan Davis",
+        NoOfRoomsBooked: 2,
+        Price: 120,
+        Discount: 12
+      }
+    ]
+  },
+  {   
+    HotelId: "HOT0399",
+    HotelName: "Green Valley Inn",
+    HotelType: ["3 Star", "4 Star"],
+    TotNoOfRooms: 60,
+    CityName: "San Francisco",
+    DateOfRegistration: ISODate("2021-09-12T00:00:00Z"),
+    ContactNumber: "8529637410",
+    Ratings: 4.4,
+    Owners: ["Robert Brown", "Lisa Black"],
+    Bookings: [
+      {
+        BookingId: "B005",
+        BookingDate: ISODate("2023-07-30T00:00:00Z"),
+        RoomType: ["Deluxe", "Studio"],
+        CustomerName: "Thomas Harris",
+        NoOfRoomsBooked: 4,
+        Price: 250,
+        Discount: 20
+      }
+    ]
+  },
+  {   
+    HotelId: "HOT0400",
+    HotelName: "Skyline Hotel",
+    HotelType: ["4 Star", "5 Star"],
+    TotNoOfRooms: 100,
+    CityName: "Chicago",
+    DateOfRegistration: ISODate("2023-03-01T00:00:00Z"),
+    ContactNumber: "3216549870",
+    Ratings: 4.7,
+    Owners: ["James Taylor", "Olivia White"],
+    Bookings: [
+      {
+        BookingId: "B006",
+        BookingDate: ISODate("2023-09-10T00:00:00Z"),
+        RoomType: ["Penthouse", "King Suite"],
+        CustomerName: "David Clark",
+        NoOfRoomsBooked: 5,
+        Price: 500,
+        Discount: 25
+      }
+    ]
+  }
+])
+
+db.HotelBookings.find()
+
+// Find hotels where Ratings are greater than 4
+db.HotelBookings.find({Ratings:{$gt:4}})
+
+// Count the number of hotels in each CityName
+db.HotelBookings.aggregate([{$group:{"_id":"$CityName",
+                            "Count":{$sum:1}
+}}])
+
+// Find hotels that have "Star" in their HotelType
+db.HotelBookings.find({HotelType:/Star/i},{HotelName:1,HotelType:1})
+
+// Retrieve all hotels that have at least one booking
+db.HotelBookings.find({Bookings:{$ne:[]}})
+
+// Find the highest-rated hotel
+db.HotelBookings.aggregate([{$group:{"_id":"Ratings","Max":{$max:"$Ratings"}}}])
+
+// Retrieve all hotels where the ContactNumber starts with '12'
+db.HotelBookings.find({ContactNumber:/^12/})
+
+// Count the total number of rooms available in all hotels
+db.HotelBookings.aggregate([{$group:{"_id":"TotNoOfRooms","Sum":{"$sum":"$TotNoOfRooms"}}}])
+
+// Find hotels where the discount given is greater than 5% in any booking
+db.HotelBookings.find({"Bookings.Discount":{$gt:5}})
+
+
+// Find hotels that have more than 2 owners
+db.HotelBookings.find({},{Owners:1})
+db.HotelBookings.aggregate([{$group:{"_id":"Owners","Count":{"$size":"Owners"}}}])
+db.HotelBookings.find({$eq: [ { $size: "$Owners" }, 2]})
+db.HotelBookings.find(
+  {
+    $expr: { $gt: [ { $size: "$Owners" }, 2 ] }
+  }
+);
+
+// Count the number of hotels in each CityName
+
+
+
+
+// Display only the HotelName’s, where TotNoOfRooms is greater than 35.
+
+
+// Find HotelName and CityName, where HotelId is either “HOT0395” or “HOT2659”.
+
+
+// Display the HotelName’s and DateOfRegistration of hotels, whose TotNoOfRooms is greater than 30 and less than 45.
+
+
+// Modify HotelType of hotel with HotelId: “HOT3951”.
+
+
+// Add a field called “History”, which describes the hotel for documents with HotelId, “HOT2156”, “HOT3951” and “HOT3654”.
+
+// Find those documents where the HotelType is not “4 Star”.
+
+// Display only the HotelName and DateOfRegistration where HotelName begins with letter “S”.
+
+// Display HotelName and ContactNumber in the descending order of the HotelName’s.
+
+// Find those hotels where number of owners is 3.
+
+// Add an owner “Mr. Mathur” in the list of owners in the document whose HotelId is “HOT0395”.
+
+
+// AGGREGATE
+
+db.employees.insert(
+{"name":"Adma","dept":"Admin","languages":["german","french","english","hindi"],"age":30, "totalExp":10});
+db.empemployees.insert(
+{"name":"Anna","dept":"Admin","languages":["english","hindi"],"age":35, "totalExp":11});
+db.empemployees.insert(
+{"name":"Bob","dept":"Facilities","languages":["english","hindi"],"age":36, "totalExp":14});
+db.empemployees.insert(
+{"name":"Cathy","dept":"Facilities","languages":["hindi"],"age":31, "totalExp":4});
+db.empemployees.insert(
+{"name":"Mike","dept":"HR","languages":["english", "hindi", "spanish"],"age":26, "totalExp":3});
+db.employees.insert(
+{"name":"Jenny","dept":"HR","languages":["english", "hindi", "spanish"],"age":25, "totalExp":3});
+db.employees.insert(
+{"name":"Jerry","dept":"HR","languages":["english", "Sanskrit", "spanish"],"age":25, "totalExp":1});
+
+
+db.employees.insertMany([
+  {"name":"Adma","dept":"Admin","languages":["German","French","English","Hindi"],"age":30,"totalExp":10},
+  {"name":"Brian","dept":"HR","languages":["English","Spanish"],"age":28,"totalExp":6},
+  {"name":"Clara","dept":"Finance","languages":["English","French"],"age":32,"totalExp":8},
+  {"name":"David","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":5},
+  {"name":"Eva","dept":"Marketing","languages":["German","English"],"age":31,"totalExp":7},
+  {"name":"Frank","dept":"Admin","languages":["English","Hindi","Gujarati"],"age":35,"totalExp":12},
+  {"name":"Grace","dept":"Finance","languages":["English","Spanish"],"age":29,"totalExp":7},
+  {"name":"Harry","dept":"Sales","languages":["English"],"age":33,"totalExp":9},
+  {"name":"Isabel","dept":"HR","languages":["English","French","Hindi"],"age":26,"totalExp":4},
+  {"name":"Jack","dept":"IT","languages":["English","German"],"age":24,"totalExp":3},
+  {"name":"Kiran","dept":"Support","languages":["Hindi","Gujarati","English"],"age":34,"totalExp":10},
+  {"name":"Lena","dept":"Finance","languages":["English"],"age":28,"totalExp":5},
+  {"name":"Mohan","dept":"Admin","languages":["Hindi","English"],"age":40,"totalExp":15},
+  {"name":"Nora","dept":"Sales","languages":["English","Spanish","French"],"age":29,"totalExp":6},
+  {"name":"Omar","dept":"Marketing","languages":["Arabic","English"],"age":31,"totalExp":8},
+  {"name":"Priya","dept":"IT","languages":["English","Hindi"],"age":25,"totalExp":3},
+  {"name":"Quinn","dept":"Finance","languages":["English","German"],"age":30,"totalExp":6},
+  {"name":"Ravi","dept":"Support","languages":["Hindi","English"],"age":38,"totalExp":14},
+  {"name":"Sara","dept":"Admin","languages":["English","French"],"age":27,"totalExp":5},
+  {"name":"Tom","dept":"HR","languages":["English"],"age":35,"totalExp":12},
+  {"name":"Uma","dept":"IT","languages":["English","Tamil","Hindi"],"age":29,"totalExp":7},
+  {"name":"Vikram","dept":"Finance","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Wendy","dept":"Marketing","languages":["English","French"],"age":26,"totalExp":4},
+  {"name":"Xavier","dept":"Sales","languages":["English","Spanish"],"age":36,"totalExp":11},
+  {"name":"Yash","dept":"Support","languages":["Hindi","Gujarati"],"age":31,"totalExp":8},
+  {"name":"Zara","dept":"HR","languages":["English","Arabic"],"age":25,"totalExp":3},
+  {"name":"Amit","dept":"Admin","languages":["Hindi","English"],"age":37,"totalExp":13},
+  {"name":"Bella","dept":"Finance","languages":["English","French"],"age":28,"totalExp":6},
+  {"name":"Carlos","dept":"Marketing","languages":["Spanish","English"],"age":34,"totalExp":10},
+  {"name":"Disha","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"Ethan","dept":"Sales","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Farah","dept":"Support","languages":["Urdu","English","Hindi"],"age":30,"totalExp":9},
+  {"name":"Gaurav","dept":"Finance","languages":["Hindi","English"],"age":41,"totalExp":16},
+  {"name":"Hina","dept":"HR","languages":["English","Gujarati"],"age":29,"totalExp":6},
+  {"name":"Irfan","dept":"IT","languages":["English","Hindi"],"age":26,"totalExp":3},
+  {"name":"Jaya","dept":"Admin","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Kamal","dept":"Sales","languages":["English","Hindi"],"age":35,"totalExp":11},
+  {"name":"Leena","dept":"Finance","languages":["English","French"],"age":28,"totalExp":5},
+  {"name":"Manish","dept":"Support","languages":["English","Hindi","Gujarati"],"age":39,"totalExp":14},
+  {"name":"Nikhil","dept":"IT","languages":["English","Hindi"],"age":30,"totalExp":8},
+  {"name":"Olivia","dept":"Marketing","languages":["English","French"],"age":27,"totalExp":4},
+  {"name":"Pooja","dept":"HR","languages":["English","Hindi"],"age":25,"totalExp":2},
+  {"name":"Qadir","dept":"Finance","languages":["Arabic","English"],"age":34,"totalExp":9},
+  {"name":"Rita","dept":"Admin","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Sameer","dept":"IT","languages":["English","Hindi"],"age":29,"totalExp":6},
+  {"name":"Tina","dept":"Sales","languages":["English","Spanish"],"age":31,"totalExp":8},
+  {"name":"Umesh","dept":"Support","languages":["Hindi","Gujarati"],"age":36,"totalExp":10},
+  {"name":"Vani","dept":"Finance","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"William","dept":"Marketing","languages":["English","German"],"age":38,"totalExp":13},
+  {"name":"Zubin","dept":"Admin","languages":["English","Hindi"],"age":40,"totalExp":15}
+]);
+
+
+db.employees.find();
+db.employees.aggregate([{$group:{"_id":"$age"}}])
+
+
+db.employees.aggregate([{$group:{"_id":"$dept"}}]);
+
+db.employees.aggregate([{
+    $group:{"_id":"$dept",
+            "Max":{$max:"$age"}}
+}])
+
+db.employees.aggregate([{
+    $group:{"_id":"$dept",
+        "Min":{$sum:1}
+    }
+}])
+
+db.employees.aggregate([
+    {$group:{"_id":"$dept",
+    "First":{$first:"$name"},
+    "Last":{$last:"$name"}}}
+])

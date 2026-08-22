@@ -1,0 +1,9 @@
+CREATE TABLE Job (
+    Job_Id NUMBER PRIMARY KEY,
+    Job_Type VARCHAR2(50)
+);
+INSERT INTO Job VALUES (101, 'Assemble');
+INSERT INTO Job VALUES (102, 'Packing');
+INSERT INTO Job VALUES (103, 'Cutting');
+INSERT INTO Job VALUES (104, 'Welding');
+INSERT INTO Job VALUES (105, 'Painting');

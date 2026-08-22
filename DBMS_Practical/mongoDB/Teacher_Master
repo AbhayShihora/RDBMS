@@ -1,0 +1,89 @@
+use Teacher
+
+db.createCollection("Teacher_Master")
+
+db.Teacher_Master.insert(
+    {
+        _id:1,
+        Name:"Abhay Shihora",
+        Age:21,
+        Subject:["Gujarati","Sanskrit"],
+        DOB:"14-Oct-2004",
+        Gender:"Male",
+        Salary:20000,
+        City:"Ahmedabad"
+    }
+)
+
+db.Teacher_Master.insert(
+    {
+        _id:2,
+        Name:"Darshan Shah",
+        Age:22,
+        Subject:["Hindi","English"],
+        DOB:"04-Oct-2004",
+        Gender:"Male",
+        Salary:25000,
+        City:"Ahmedabad"
+    }
+)
+db.Teacher_Master.insert(
+    {
+        _id:3,
+        Name:"Anil Bambhaniya",
+        Age:25,
+        Subject:["Marathi"],
+        DOB:"04-Oct-2004",
+        Gender:"Male",
+        Salary:25000,
+        City:"Ahmedabad"
+    }
+)
+db.Teacher_Master.insert(
+    {
+        _id:4,
+        Name:"Khushal Div",
+        Age:30,
+        Subject:["Sanskrit","English"],
+        DOB:"15-Jan-2005",
+        Gender:"Male",
+        Salary:40000,
+        City:"Div"
+    }
+)
+db.Teacher_Master.insert(
+    {
+        _id:5,
+        Name:"Meera Patel",
+        Age:45,
+        Subject:["Maths","English"],
+        DOB:"01-Jan-1980",
+        Gender:"Female",
+        Salary:61000,
+        City:"Gandhinagar"
+    }
+)
+db.Teacher_Master.insert(
+    {
+        _id:6,
+        Name:"Dhrshti Dave",
+        Age:32,
+        Subject:["Hindi","Gujarati"],
+        DOB:"05-May-1992",
+        Gender:"Female",
+        Salary:43000,
+        City:"Surat"
+    }
+)
+db.Teacher_Master.insert(
+    {
+        _id:7,
+        Name:"Rajnikant Trivedi",
+        Age:26,
+        Subject:["Hindi","Gujarati"],
+        DOB:"21-Aug-1999",
+        Gender:"Male",
+        Salary:53000,
+        City:"Bhavnagar"
+    }
+)

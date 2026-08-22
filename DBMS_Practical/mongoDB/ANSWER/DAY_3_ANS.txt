@@ -1,0 +1,396 @@
+Create a Student Master database with a collection called “Student” containing
+-->use Student
+
+-->db.createCollection("Student_Master")
+-------------------------------------------------------------------------------------
+documents with some or all of the following fields: StudentRollNo, StudentName,
+Grade, Hobbies, and DOJ.
+
+-------------------------------------------------------------------------------------
+Perform the following operations on the database:
+
+
+a) Insert 10 Records in the database.
+
+db.Student_Master.insert(
+{
+    _id:1,
+    RollNo:27, 
+    Sname:"Abhay Shihora",
+    Grade:"I", 
+    Hobbies:["Learn New","Chess"], 
+    DOJ:"14-Oct-2025"
+})
+
+db.Student_Master.insert(
+{
+    _id:2,
+    RollNo:14, 
+    Sname:"Khushal Div",
+    Grade:"II", 
+    Hobbies:["Movie","Ridding"], 
+    DOJ:"12-Jan-2025"
+})
+
+db.Student_Master.insert(
+{
+    _id:3,
+    RollNo:53, 
+    Sname:"Darshan Shah",
+    Grade:"Iv", 
+    Hobbies:["Gaming","Football"], 
+    DOJ:"21-Feb-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:4,
+    RollNo:5, 
+    Sname:"Kamen Sutariya",
+    Grade:"I", 
+    Hobbies:["Singing","Chess"], 
+    DOJ:"23-Mar-2015"
+})
+
+db.Student_Master.insert(
+{
+    _id:5,
+    RollNo:47, 
+    Sname:"Akshay Patel",
+    Grade:"I", 
+    Hobbies:["Movie","Dansing"], 
+    DOJ:"31-Aug-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:6,
+    RollNo:22, 
+    Sname:"Meera Dave",
+    Grade:"VII", 
+    Hobbies:["Dancing","Chess"], 
+    DOJ:"02-Dec-2020"
+})
+
+db.Student_Master.insert(
+{
+    _id:7,
+    RollNo:7, 
+    Sname:"Khushali Tejani",
+    Grade:"IV", 
+    Hobbies:["Table Tennis","Chess"], 
+    DOJ:"12-Jun-2019"
+})
+
+db.Student_Master.insert(
+{
+    _id:8,
+    RollNo:1, 
+    Sname:"Karan",
+    Grade:"VI", 
+    Hobbies:["Vollyball","Gaming"], 
+    DOJ:"01-Jan-2022"
+})
+
+db.Student_Master.insert(
+{
+    _id:9,
+    RollNo:9, 
+    Sname:"Jyoti Shah",
+    Grade:"V", 
+    Hobbies:["Codding","Analysis"], 
+    DOJ:"14-Apr-2024"
+})
+db.Student_Master.insert(
+{
+    _id:10,
+    RollNo:27, 
+    Sname:"Bhavik Suthar",
+    Grade:"III", 
+    Hobbies:["Testing","Mind Game"], 
+    DOJ:"04-Nov-2024"
+})
+
+-------------------------------------------------------------------------------------
+b) Find the document where in the “StudName” has value “Akhay”.
+-->db.Student_Master.find({Sname:"Akshay Patel"})
+
+    > db.Student_Master.find({Sname:"Akshay Patel"})
+    { "_id" : 5, "RollNo" : 47, "Sname" : "Akshay Patel", "Grade" : "I", "Hobbies" : [ "Movie", "Dansing" ], "DOJ" : "31-Aug-2020" }
+-------------------------------------------------------------------------------------
+c) Find all documents in proper (like tabular) format. (Without _Id field)
+-->db.Student_Master.find({},{_id:0}).pretty()
+
+    > db.Student_Master.find({},{_id:0}).pretty()
+    {
+            "RollNo" : 27,
+            "Sname" : "Abhay Shihora",
+            "Grade" : "I",
+            "Hobbies" : [
+                    "Learn New",
+                    "Chess"
+            ],
+            "DOJ" : "14-Oct-2025"
+    }
+    {
+            "RollNo" : 14,
+            "Sname" : "Khushal Div",
+            "Grade" : "II",
+            "Hobbies" : [
+                    "Movie",
+                    "Ridding"
+            ],
+            "DOJ" : "12-Jan-2025"
+    }
+    {
+            "RollNo" : 53,
+            "Sname" : "Darshan Shah",
+            "Grade" : "Iv",
+            "Hobbies" : [
+                    "Gaming",
+                    "Football"
+            ],
+            "DOJ" : "21-Feb-2020"
+    }
+    {
+            "RollNo" : 5,
+            "Sname" : "Kamen Sutariya",
+            "Grade" : "I",
+            "Hobbies" : [
+                    "Singing",
+                    "Chess"
+            ],
+            "DOJ" : "23-Mar-2015"
+    }
+    {
+            "RollNo" : 47,
+            "Sname" : "Akshay Patel",
+            "Grade" : "I",
+            "Hobbies" : [
+                    "Movie",
+                    "Dansing"
+            ],
+            "DOJ" : "31-Aug-2020"
+    }
+    {
+            "RollNo" : 22,
+            "Sname" : "Meera Dave",
+            "Grade" : "VII",
+            "Hobbies" : [
+                    "Dancing",
+                    "Chess"
+            ],
+            "DOJ" : "02-Dec-2020"
+    }
+    {
+            "RollNo" : 7,
+            "Sname" : "Khushali Tejani",
+            "Grade" : "IV",
+            "Hobbies" : [
+                    "Table Tennis",
+                    "Chess"
+            ],
+            "DOJ" : "12-Jun-2019"
+    }
+    {
+            "RollNo" : 1,
+            "Sname" : "Karan",
+            "Grade" : "VI",
+            "Hobbies" : [
+                    "Vollyball",
+                    "Gaming"
+            ],
+            "DOJ" : "01-Jan-2022"
+    }
+    {
+            "RollNo" : 9,
+            "Sname" : "Jyoti Shah",
+            "Grade" : "V",
+            "Hobbies" : [
+                    "Codding",
+                    "Analysis"
+            ],
+            "DOJ" : "14-Apr-2024"
+    }
+    {
+            "RollNo" : 27,
+            "Sname" : "Bhavik Suthar",
+            "Grade" : "III",
+            "Hobbies" : [
+                    "Testing",
+                    "Mind Game"
+            ],
+            "DOJ" : "04-Nov-2024"
+    }
+-------------------------------------------------------------------------------------
+d) Retrieve only Student Name and Grade.
+-->db.Student_Master.find({},{_id:0,Sname:1,Grade:1})
+
+    > db.Student_Master.find({},{_id:0,Sname:1,Grade:1})
+    { "Sname" : "Abhay Shihora", "Grade" : "I" }
+    { "Sname" : "Khushal Div", "Grade" : "II" }
+    { "Sname" : "Darshan Shah", "Grade" : "Iv" }
+    { "Sname" : "Kamen Sutariya", "Grade" : "I" }
+    { "Sname" : "Akshay Patel", "Grade" : "I" }
+    { "Sname" : "Meera Dave", "Grade" : "VII" }
+    { "Sname" : "Khushali Tejani", "Grade" : "IV" }
+    { "Sname" : "Karan", "Grade" : "VI" }
+    { "Sname" : "Jyoti Shah", "Grade" : "V" }
+    { "Sname" : "Bhavik Suthar", "Grade" : "III" }
+
+-------------------------------------------------------------------------------------
+e) Retrieve Student Name and Grade of student who is having _id column is 1.
+-->db.Student_Master.find({_id:1},{_id:0,Sname:1,Grade:1})
+
+    > db.Student_Master.find({_id:1},{_id:0,Sname:1,Grade:1})
+    { "Sname" : "Abhay Shihora", "Grade" : "I" }    
+
+-------------------------------------------------------------------------------------
+f) Add new field “Address” in Student collection.
+-->db.Student_Master.find()
+
+-------------------------------------------------------------------------------------
+g) Find those documents where the Grade is set to ‘VII’.
+-->db.Student_Master.find({Grade:"VII"})
+
+    > db.Student_Master.find({Grade:"VII"})
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+
+-------------------------------------------------------------------------------------
+h) Find those documents where the Grade is not set to ‘VII’.
+-->db.Student_Master.find({Grade:{$ne:"VII"}})
+
+    > db.Student_Master.find({Grade:{$ne:"VII"}})
+    { "_id" : 1, "RollNo" : 27, "Sname" : "Abhay Shihora", "Grade" : "I", "Hobbies" : [ "Learn New", "Chess" ], "DOJ" : "14-Oct-2025" }
+    { "_id" : 2, "RollNo" : 14, "Sname" : "Khushal Div", "Grade" : "II", "Hobbies" : [ "Movie", "Ridding" ], "DOJ" : "12-Jan-2025" }
+    { "_id" : 3, "RollNo" : 53, "Sname" : "Darshan Shah", "Grade" : "Iv", "Hobbies" : [ "Gaming", "Football" ], "DOJ" : "21-Feb-2020" }
+    { "_id" : 4, "RollNo" : 5, "Sname" : "Kamen Sutariya", "Grade" : "I", "Hobbies" : [ "Singing", "Chess" ], "DOJ" : "23-Mar-2015" }
+    { "_id" : 5, "RollNo" : 47, "Sname" : "Akshay Patel", "Grade" : "I", "Hobbies" : [ "Movie", "Dansing" ], "DOJ" : "31-Aug-2020" }
+    { "_id" : 7, "RollNo" : 7, "Sname" : "Khushali Tejani", "Grade" : "IV", "Hobbies" : [ "Table Tennis", "Chess" ], "DOJ" : "12-Jun-2019" }
+    { "_id" : 8, "RollNo" : 1, "Sname" : "Karan", "Grade" : "VI", "Hobbies" : [ "Vollyball", "Gaming" ], "DOJ" : "01-Jan-2022" }
+    { "_id" : 9, "RollNo" : 9, "Sname" : "Jyoti Shah", "Grade" : "V", "Hobbies" : [ "Codding", "Analysis" ], "DOJ" : "14-Apr-2024" }
+    { "_id" : 10, "RollNo" : 27, "Sname" : "Bhavik Suthar", "Grade" : "III", "Hobbies" : [ "Testing", "Mind Game" ], "DOJ" : "04-Nov-2024" }
+
+-------------------------------------------------------------------------------------
+i) Find those documents where the Hobbies is either ‘Chess’ or ‘Dancing”.
+->db.Student_Master.find({Hobbies:"Chess"})
+->db.Student_Master.find({Hobbies:"Dancing"})
+-->db.Student_Master.find({$or:[{Hobbies:"Chess"},{Hobbies:"Dancing"}]})
+
+    > db.Student_Master.find({$or:[{Hobbies:"Chess"},{Hobbies:"Dancing"}]})
+    { "_id" : 1, "RollNo" : 27, "Sname" : "Abhay Shihora", "Grade" : "I", "Hobbies" : [ "Learn New", "Chess" ], "DOJ" : "14-Oct-2025" }
+    { "_id" : 4, "RollNo" : 5, "Sname" : "Kamen Sutariya", "Grade" : "I", "Hobbies" : [ "Singing", "Chess" ], "DOJ" : "23-Mar-2015" }
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+    { "_id" : 7, "RollNo" : 7, "Sname" : "Khushali Tejani", "Grade" : "IV", "Hobbies" : [ "Table Tennis", "Chess" ], "DOJ" : "12-Jun-2019" }
+
+-------------------------------------------------------------------------------------
+j) Find those documents where the Hobbies is  neither to ‘Chess’ nor is ‘Dancing”. k) 
+-->db.Student_Master.find({Hobbies:{$nin:["Chess","Dancing"]}})
+
+    > db.Student_Master.find({Hobbies:{$nin:["Chess","Dancing"]}})
+    { "_id" : 2, "RollNo" : 14, "Sname" : "Khushal Div", "Grade" : "II", "Hobbies" : [ "Movie", "Ridding" ], "DOJ" : "12-Jan-2025" }
+    { "_id" : 3, "RollNo" : 53, "Sname" : "Darshan Shah", "Grade" : "Iv", "Hobbies" : [ "Gaming", "Football" ], "DOJ" : "21-Feb-2020" }
+    { "_id" : 5, "RollNo" : 47, "Sname" : "Akshay Patel", "Grade" : "I", "Hobbies" : [ "Movie", "Dansing" ], "DOJ" : "31-Aug-2020" }
+    { "_id" : 8, "RollNo" : 1, "Sname" : "Karan", "Grade" : "VI", "Hobbies" : [ "Vollyball", "Gaming" ], "DOJ" : "01-Jan-2022" }
+    { "_id" : 9, "RollNo" : 9, "Sname" : "Jyoti Shah", "Grade" : "V", "Hobbies" : [ "Codding", "Analysis" ], "DOJ" : "14-Apr-2024" }
+    { "_id" : 10, "RollNo" : 27, "Sname" : "Bhavik Suthar", "Grade" : "III", "Hobbies" : [ "Testing", "Mind Game" ], "DOJ" : "04-Nov-2024" }
+
+-------------------------------------------------------------------------------------
+K) Find those documents where the student name begins with ‘M’.
+-->db.Student_Master.find({Sname:{$regex:"^M"}})
+
+    > db.Student_Master.find({Sname:{$regex:"^M"}})
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+
+-------------------------------------------------------------------------------------
+l) Find those documents where the student name has an “e” in any position.
+-->db.Student_Master.find({Sname:{$regex:"e",$options:"i"}})
+
+    > db.Student_Master.find({Sname:{$regex:"e",$options:"i"}})
+    { "_id" : 4, "RollNo" : 5, "Sname" : "Kamen Sutariya", "Grade" : "I", "Hobbies" : [ "Singing", "Chess" ], "DOJ" : "23-Mar-2015" }
+    { "_id" : 5, "RollNo" : 47, "Sname" : "Akshay Patel", "Grade" : "I", "Hobbies" : [ "Movie", "Dansing" ], "DOJ" : "31-Aug-2020" }
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+    { "_id" : 7, "RollNo" : 7, "Sname" : "Khushali Tejani", "Grade" : "IV", "Hobbies" : [ "Table Tennis", "Chess" ], "DOJ" : "12-Jun-2019" }
+
+-------------------------------------------------------------------------------------
+m) Find those documents where the student name ends in “a”.
+-->db.Student_Master.find({Sname:{$regex:"a$"}})
+
+    > db.Student_Master.find({Sname:{$regex:"a$"}})
+    { "_id" : 1, "RollNo" : 27, "Sname" : "Abhay Shihora", "Grade" : "I", "Hobbies" : [ "Learn New", "Chess" ], "DOJ" : "14-Oct-2025" }
+    { "_id" : 4, "RollNo" : 5, "Sname" : "Kamen Sutariya", "Grade" : "I", "Hobbies" : [ "Singing", "Chess" ], "DOJ" : "23-Mar-2015" }
+
+-------------------------------------------------------------------------------------
+n) Find total number of documents.
+-->db.Student_Master.countDocuments({})
+
+    > db.Student_Master.countDocuments({})
+    10
+
+-------------------------------------------------------------------------------------
+o) Find total number of documents where Grade is ‘VII’.
+-->db.Student_Master.countDocuments({Grade:"VII"})
+-->db.Student_Master.find({Grade:"VII"})
+
+    > db.Student_Master.countDocuments({Grade:"VII"})
+    1
+
+    > db.Student_Master.find({Grade:"VII"})
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+
+-------------------------------------------------------------------------------------
+p) Sort the documents in ascending order of student name.
+-->db.Student_Master.find().sort({Sname:1})  //Ascending
+-->db.Student_Master.find().sort({Sname:-1}) //Descending
+
+    > db.Student_Master.find().sort({Sname:1})
+    { "_id" : 1, "RollNo" : 27, "Sname" : "Abhay Shihora", "Grade" : "I", "Hobbies" : [ "Learn New", "Chess" ], "DOJ" : "14-Oct-2025" }
+    { "_id" : 5, "RollNo" : 47, "Sname" : "Akshay Patel", "Grade" : "I", "Hobbies" : [ "Movie", "Dansing" ], "DOJ" : "31-Aug-2020" }
+    { "_id" : 10, "RollNo" : 27, "Sname" : "Bhavik Suthar", "Grade" : "III", "Hobbies" : [ "Testing", "Mind Game" ], "DOJ" : "04-Nov-2024" }
+    { "_id" : 3, "RollNo" : 53, "Sname" : "Darshan Shah", "Grade" : "Iv", "Hobbies" : [ "Gaming", "Football" ], "DOJ" : "21-Feb-2020" }
+    { "_id" : 9, "RollNo" : 9, "Sname" : "Jyoti Shah", "Grade" : "V", "Hobbies" : [ "Codding", "Analysis" ], "DOJ" : "14-Apr-2024" }
+    { "_id" : 4, "RollNo" : 5, "Sname" : "Kamen Sutariya", "Grade" : "I", "Hobbies" : [ "Singing", "Chess" ], "DOJ" : "23-Mar-2015" }
+    { "_id" : 8, "RollNo" : 1, "Sname" : "Karan", "Grade" : "VI", "Hobbies" : [ "Vollyball", "Gaming" ], "DOJ" : "01-Jan-2022" }
+    { "_id" : 2, "RollNo" : 14, "Sname" : "Khushal Div", "Grade" : "II", "Hobbies" : [ "Movie", "Ridding" ], "DOJ" : "12-Jan-2025" }
+    { "_id" : 7, "RollNo" : 7, "Sname" : "Khushali Tejani", "Grade" : "IV", "Hobbies" : [ "Table Tennis", "Chess" ], "DOJ" : "12-Jun-2019" }
+    { "_id" : 6, "RollNo" : 22, "Sname" : "Meera Dave", "Grade" : "VII", "Hobbies" : [ "Dancing", "Chess" ], "DOJ" : "02-Dec-2020" }
+
+-------------------------------------------------------------------------------------
+q) Display the last two records.
+-->db.Student_Master.find().sort({_id:-1}).limit(2)
+
+    > db.Student_Master.find().sort({_id:-1}).limit(2)
+    { "_id" : 10, "RollNo" : 27, "Sname" : "Bhavik Suthar", "Grade" : "III", "Hobbies" : [ "Testing", "Mind Game" ], "DOJ" : "04-Nov-2024" }
+    { "_id" : 9, "RollNo" : 9, "Sname" : "Jyoti Shah", "Grade" : "V", "Hobbies" : [ "Codding", "Analysis" ], "DOJ" : "14-Apr-2024" }
+-------------------------------------------------------------------------------------
+
+
+r)Update grade of student VII to VIII
+-->db.Student_Master.updateMany({Grade:"VII"},{$set:{Grade:"VIII"}})
+ 
+    > db.Student_Master.updateMany({Grade:"VII"},{$set:{Grade:"VIII"}})
+    { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+s)add new col city whose start with A
+-->db.Student_Master.updateMany({},{$set:{City:"Ahmedabad"}})
+    
+    > db.Student_Master.updateMany({},{$set:{City:"Ahmedabad"}})
+    { "acknowledged" : true, "matchedCount" : 10, "modifiedCount" : 10 }
+
+t)remove new added col city from student table whose name start with A
+-->db.Student_Master.updateMany({Sname:{$regex:"^A"}},{$unset:{City:"Ahmedabad"}})
+
+    > db.Student_Master.updateMany({Sname:{$regex:"^A"}},{$unset:{City:"Ahmedabad"}})
+    { "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }  
+
+u)Addnew col state:"Gujarat" 
+-->db.Student_Master.updateMany({},{$set:{State:"Gujarat"}})
+
+    > db.Student_Master.updateMany({},{$set:{State:"Gujarat"}})
+    { "acknowledged" : true, "matchedCount" : 10, "modifiedCount" : 10 }
+    
+v)increase roll numner by 1
+db.Student_Master.updateMany({RollNo:1},{$inc:{RollNo:1}})
+
+    > db.Student_Master.updateMany({RollNo:1},{$inc:{RollNo:1}})
+    { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }

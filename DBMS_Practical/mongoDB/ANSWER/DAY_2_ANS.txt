@@ -1,0 +1,212 @@
+Create a new MongoDB database called “EMPLOYEE”.
+--> use Employee 
+-------------------------------------------------------------------------------------
+
+Within “EMPLOYEE” database, create a collection named EMPLOYEE_MASTER”
+--> db.createCollection("Employee_Master")
+-------------------------------------------------------------------------------------
+assume an appropriate schema consisting of fields like Empno, Name, Designation, DOJ, Department, Salary, Gender, Skills(array)
+
+
+1. Insert 7 documents into the above collection.
+
+db.Employee_Master.insert(
+{
+    _id:1,
+    "Empno":1234,
+    "Name":"Abhay Shihora",
+    "Des":"Manager",
+    "DOJ":"12-Dec-2009",
+    "Dept":"Sales",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["german","Writting"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:2,
+    "Empno":3321,
+    "Name":"Sonal",
+    "Des":"J.Clerk",
+    "DOJ":"21-Jan-2015",
+    "Dept":"Purchase",
+    "Gender":"Female",
+    "Salary":21000,
+    "Skill":["Learn New","Speaking"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:3,
+    "Empno":8877,
+    "Name":"Bob",
+    "Dept":"Facilities",
+    "Des":"Worker",
+    "DOJ":"23-Jun-2021",
+    "Gender":"Male",
+    "Salary":14000,
+    "Skill":["Movie","History"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:4,
+    "Empno":4323,
+    "Name":"Cathy",
+    "Dept":"Sales",
+    "Des":"Manager",
+    "DOJ":"25-May-2018",
+    "Gender":"Female",
+    "Salary":32000,
+    "Skill":["Learn History","Watch Movie"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:5,
+    "Empno":4453,
+    "Name":"Mike",
+    "Dept":"HR",
+    "Des":"S.Clerk",
+    "DOJ":"31-Jan-2024",
+    "Gender":"Male",
+    "Salary":27000,
+    "Skill":["New Learn","Coding"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:6,
+    "Empno":1234,
+    "Name":"Jenny",
+    "Dept":"HR",
+    "Des":"CEO",
+    "DOJ":"22-Aug-2015",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["Testing Code","Writting"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:7,
+    "Empno":5463,
+    "Name":"Jerry",
+    "Dept":"Purchase",
+   "Des":"Worker",
+    "DOJ":"20-Nov-2023",
+    "Gender":"Female",
+    "Salary":29500,
+    "Skill":["Speaking","Writting"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:8,
+    "Empno":6566,
+    "Name":"Darshan",
+    "Dept":"HR",
+    "Des":"Scientist",
+    "DOJ":"22-Aug-2015",
+    "Gender":"Male",
+    "Salary":12000,
+    "Skill":["Testing Code","Writting"]
+});
+
+db.Employee_Master.insert(
+{
+    _id:9,
+    "Empno":3423,
+    "Name":"Khushal",
+    "Dept":"Purchase",
+   "Des":"Engineer",
+    "DOJ":"20-Nov-2023",
+    "Gender":"Female",
+    "Salary":29500,
+    "Skill":["Speaking","Writting"]
+});
+
+-------------------------------------------------------------------------------------
+2. Display Name, Department, Gender and Salary.
+-->db.Employee_Master.find({},{Name:1,Dept:1,Salary:1,_id:0})
+
+    > db.Employee_Master.find({},{Name:1,Dept:1,Salary:1,_id:0})
+    { "Name" : "Abhay Shihora", "Dept" : "Sales", "Salary" : 12000 }
+    { "Name" : "Sonal", "Dept" : "Purchase", "Salary" : 21000 }
+    { "Name" : "Bob", "Dept" : "Facilities", "Salary" : 14000 }
+    { "Name" : "Cathy", "Dept" : "Sales", "Salary" : 32000 }
+    { "Name" : "Mike", "Dept" : "HR", "Salary" : 27000 }
+    { "Name" : "Jenny", "Dept" : "HR", "Salary" : 12000 }
+    { "Name" : "Jerry", "Dept" : "Purchase", "Salary" : 29500 }
+
+-------------------------------------------------------------------------------------
+3. Display the list of employees from the department “HR”.
+-->db.Employee_Master.find({Dept:"HR"})
+
+    > db.Employee_Master.find({Dept:"HR"})
+    { "_id" : 5, "Empno" : 4453, "Name" : "Mike", "Dept" : "HR", "Des" : "S.Clerk", "DOJ" : "31-Jan-2024", "Gender" : "Male", "Salary" : 27000, "Skill" : [ "New Learn", "Coding" ] }
+    { "_id" : 6, "Empno" : 1234, "Name" : "Jenny", "Dept" : "HR", "Des" : "CEO", "DOJ" : "22-Aug-2015", "Gender" : "Male", "Salary" : 12000, "Skill" : [ "Testing Code", "Writting" ] }
+
+-------------------------------------------------------------------------------------
+4. Display the employee id, name, department and DOJ.
+-->db.Employee_Master.find({},{Name:1,Dept:1,DOJ:1})
+
+    >  db.Employee_Master.find({},{Name:1,Dept:1,DOJ:1})
+    { "_id" : 1, "Name" : "Abhay Shihora", "DOJ" : "12-Dec-2009", "Dept" : "Sales" }
+    { "_id" : 2, "Name" : "Sonal", "Dept" : "Purchase", "DOJ" : "21-Jan-2015" }
+    { "_id" : 3, "Name" : "Bob", "Dept" : "Facilities", "DOJ" : "23-Jun-2021" }
+    { "_id" : 4, "Name" : "Cathy", "Dept" : "Sales", "DOJ" : "25-May-2018" }
+    { "_id" : 5, "Name" : "Mike", "Dept" : "HR", "DOJ" : "31-Jan-2024" }
+    { "_id" : 6, "Name" : "Jenny", "Dept" : "HR", "DOJ" : "22-Aug-2015" }
+    { "_id" : 7, "Name" : "Jerry", "Dept" : "Purchase", "DOJ" : "20-Nov-2023" }
+    { "_id" : 8, "Name" : "Darshan", "Dept" : "HR", "DOJ" : "22-Aug-2015" }
+    { "_id" : 9, "Name" : "Khushal", "Dept" : "Purchase", "DOJ" : "20-Nov-2023" }
+
+-------------------------------------------------------------------------------------
+5. Display the employees whose gender is female and designation either “Engineer” or “Scientist”.
+->db.Employee_Master.find({Gender:"Female"})
+->db.Employee_Master.find({$or:[{Des:"Engineer"},{Des:"Scientist"}]})
+
+-->db.Employee_Master($and:[{Gender:"Female"},{$or:[{Des:"Engineer"},{Des:"Scientist"}]}])
+
+    > db.Employee_Master.find({$or:[{Des:"Engineer"},{Des:"Scientist"}]})
+    { "_id" : 8, "Empno" : 6566, "Name" : "Darshan", "Dept" : "HR", "Des" : "Scientist", "DOJ" : "22-Aug-2015", "Gender" : "Male", "Salary" : 12000, "Skill" : [ "Testing Code", "Writting" ] }
+    { "_id" : 9, "Empno" : 3423, "Name" : "Khushal", "Dept" : "Purchase", "Des" : "Engineer", "DOJ" : "20-Nov-2023", "Gender" : "Female", "Salary" : 29500, "Skill" : [ "Speaking", "Writting" ] }
+
+-------------------------------------------------------------------------------------
+6. Update all those documents where name of employee is “Akash” with the new value of designation as “Engineer”.
+
+-------------------------------------------------------------------------------------
+7. Delete all those documents where DOJ is  1st January 1999.
+-->db.Employee_Master.remove({DOJ:"31-Jan-2024"})
+
+    > db.Employee_Master.remove({DOJ:"31-Jan-2024"})
+    WriteResult({ "nRemoved" : 1 }) 
+
+-------------------------------------------------------------------------------------
+8. Display the employees whose salary is greater than 25000 and have skills Java or PHP.
+->db.Employee_Master.find({Salary:{$gt:25000}})
+-->db.Employee_Master.find({Skill:{$in:["Coding","Writting"]}})
+
+-->db.Employee_Master.find({$and:[{Salary:{$gt:25000}},{Skill:{$in:["Coding","Writting"]}}]})
+
+
+    > db.Employee_Master.find({$and:[{Salary:{$gt:25000}},{Skill:{$in:["Coding","Writting"]}}]})
+    { "_id" : 7, "Empno" : 5463, "Name" : "Jerry", "Dept" : "Purchase", "Des" : "Worker", "DOJ" : "20-Nov-2023", "Gender" : "Female", "Salary" : 29500, "Skill" : [ "Speaking", "Writting" ] }
+    { "_id" : 9, "Empno" : 3423, "Name" : "Khushal", "Dept" : "Purchase", "Des" : "Engineer", "DOJ" : "20-Nov-2023", "Gender" : "Female", "Salary" : 29500, "Skill" : [ "Speaking", "Writting" ] }
+
+-------------------------------------------------------------------------------------
+9. Find all the employees having designation “Engineer” and display salary for them.
+-->db.Employee_Master.find({Des:"Engineer"},{Salary:1,_id:0})
+
+    > db.Employee_Master.find({Des:"Engineer"},{Salary:1,_id:0})
+    { "Salary" : 29500 }
+-------------------------------------------------------------------------------------
+10. Display only those documents where the name of employee is “Amit” and designation is “Accountant”.
+-->db.Employee_Master.find({$and:[{Name:"Abhay Shihora"},{Des:"Manager"}]})
+
+    > db.Employee_Master.find({$and:[{Name:"Abhay Shihora"},{Des:"Manager"}]})
+    { "_id" : 1, "Empno" : 1234, "Name" : "Abhay Shihora", "Des" : "Manager", "DOJ" : "12-Dec-2009", "Dept" : "Sales", "Gender" : "Male", "Salary" : 12000, "Skill" : [ "german", "Writting" ] }
+    
+-------------------------------------------------------------------------------------

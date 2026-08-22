@@ -1,0 +1,977 @@
+SQL> select * from emp where ename not like('%S%');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10
+
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850
+        30
+
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450
+        10
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000
+        20
+
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300
+        30
+
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400
+        30
+
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0
+        30
+
+      7934 MILLER     CLERK           7782 23-JAN-82       1300
+        10
+
+
+9 rows selected.
+
+SQL> set lines 100;
+SQL> set pages 100;
+SQL> select * from emp where ename not like('%S%');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+9 rows selected.
+
+SQL> select * from emp where hiredate like('%-FEB-%);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('%-FEB-%')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+
+SQL> select * from emp order by hiredate;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+
+14 rows selected.
+
+SQL> select * from emp where job in('ANALYST','PRESIDENT','MANAGER');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+6 rows selected.
+
+SQL> select * from emp where hiredate like('%-SEP-%') and sal>=1500;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+
+SQL> select job from emp where deptno=10 and sal>1500;
+
+JOB
+---------
+PRESIDENT
+MANAGER
+
+SQL> select distinct(ename) from emp where deptno=20;
+
+ENAME
+----------
+JONES
+FORD
+SMITH
+SCOTT
+ADAMS
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select distinct(job) from emp where deptno=20
+SQL> /
+
+JOB
+---------
+CLERK
+MANAGER
+ANALYST
+
+SQL> select * from emp order by sal,hiredate desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp order by sal,hiredate
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp order by sal desc
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp order by sal,hiredate desc
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp order by sal desc,hiredate desc
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp order by job,sal
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+
+14 rows selected.
+
+SQL> select * from emp where job='CLERK' order by sal;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> select * from emp where job='MANAGER' order by sal;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+
+SQL> select * from emp where hiredate like
+  2  ('03-%-%','23-%-%');
+('03-%-%','23-%-%')
+         *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select * from emp where hiredate in
+  2* ('03-%-%','23-%-%')
+SQL> /
+('03-%-%','23-%-%')
+ *
+ERROR at line 2:
+ORA-01843: not a valid month
+
+
+SQL> ed'
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate in('03-%-%','23-%-%')
+SQL> /
+select * from emp where hiredate in('03-%-%','23-%-%')
+                                    *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('03-%-%') and hiredate like('23-%-%')
+SQL> /
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('03-%-%')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('23-%-%')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('23-%-%') or hiredate like('23-%-%')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from emp where hiredate like('03-%-%') or hiredate like('23-%-%')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key,
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) no null
+  8  );
+ Occupation varchar(15) no null
+                        *
+ERROR at line 7:
+ORA-00907: missing right parenthesis
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key,
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8* )
+SQL> /
+
+Table created.
+
+SQL> desc Client_Master;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ C_NO                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                           NOT NULL VARCHAR2(25)
+ PINCODE                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                            NOT NULL DATE
+ OCCUPATION                                            NOT NULL VARCHAR2(15)
+
+SQL> insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1981','dd-mm-yyyy'),
+'Manager');
+
+1 row created.
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-81 Manager
+
+SQL> insert into Client_Master Values('C002','Kajal Oza',380058,to_date('20-jnov-1981','dd-mm-yyyy')
+,'CEO');
+insert into Client_Master Values('C002','Kajal Oza',380058,to_date('20-jnov-1981','dd-mm-yyyy'),'CEO
+                                                                   *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> insert into Client_Master Values('C003','Kajal Oza',387903,to_date('17-june-1981','dd-mm-yyyy')
+,'Doctor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C004','Kajal Oza',398006,to_date('5-jan-1981','dd-mm-yyyy'),'
+Professor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C005 ','Kajal Oza',390040,to_date('28-feb-1981','dd-mm-yyyy')
+,'Clerk');select * from Clent_Master;
+insert into Client_Master Values('C005 ','Kajal Oza',390040,to_date('28-feb-1981','dd-mm-yyyy'),'Cle
+                                                                                                    
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> /
+insert into Client_Master Values('C005 ','Kajal Oza',390040,to_date('28-feb-1981','dd-mm-yyyy'),'Cle
+                                                                                                    
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-81 Manager
+C003 Kajal Oza                     387903 17-JUN-81 Doctor
+C004 Kajal Oza                     398006 05-JAN-81 Professor
+
+SQL> delete from Clent_Master;;
+delete from Clent_Master;
+                        *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> delete table Client_Master;
+delete table Client_Master
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> drop table Client_Master;
+
+Table dropped.
+
+SQL> select * from Client_Master;
+select * from Client_Master
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key,
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) no null
+  8  );
+ Occupation varchar(15) no null
+                        *
+ERROR at line 7:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key,
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8  );
+
+Table created.
+
+SQL> 
+SQL> insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1981','dd-mm-yyyy'),
+'Manager');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-jnov-1981','dd-mm-yyyy')
+,'CEO');
+insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-jnov-1981','dd-mm-yyyy'),'CEO
+                                                                   *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> insert into Client_Master Values('C003','Dhyan Dave',387903,to_date('17-june-1981','dd-mm-yyyy'
+),'Doctor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C004','Mira Vaid',398006,to_date('5-jan-1981','dd-mm-yyyy'),'
+Professor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1981','dd-mm-yyyy
+'),'Clerk');insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1981','dd-mm-
+yyyy'),'CEO');
+insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1981','dd-mm-yyyy'),'C
+                                                                                                    
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1981','dd-mm-yyyy'),
+'CEO');
+
+1 row created.
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-81 Manager
+C003 Dhyan Dave                    387903 17-JUN-81 Doctor
+C004 Mira Vaid                     398006 05-JAN-81 Professor
+C002 Vraj Shah                     380058 20-NOV-81 CEO
+
+SQL> 
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1981','dd-mm-yyyy
+'),'Clerk');
+
+1 row created.
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-81 Manager
+C003 Dhyan Dave                    387903 17-JUN-81 Doctor
+C004 Mira Vaid                     398006 05-JAN-81 Professor
+C002 Vraj Shah                     380058 20-NOV-81 CEO
+C005 Preeti Patel                  390040 28-FEB-81 Clerk
+
+SQL> drop table Client_Master;
+
+Table dropped.
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key,
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8  );
+
+Table created.
+
+SQL> 
+SQL> insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1987','dd-mm-yyyy'),
+'Manager');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1986','dd-mm-yyyy'),
+'CEO');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C003','Dhyan Dave',387903,to_date('17-june-1988','dd-mm-yyyy'
+),'Doctor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C004','Mira Vaid',398006,to_date('5-jan-1976','dd-mm-yyyy'),'
+Professor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy
+'),'Clerk');
+
+1 row created.
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-87 Manager
+C002 Vraj Shah                     380058 20-NOV-86 CEO
+C003 Dhyan Dave                    387903 17-JUN-88 Doctor
+C004 Mira Vaid                     398006 05-JAN-76 Professor
+C005 Preeti Patel                  390040 28-FEB-71 Clerk
+
+SQL> CREATE TABLE Products (
+  2      P_No VARCHAR(10) PRIMARY KEY CHECK (P_No LIKE 'P%'),
+  3      Desc VARCHAR(50),
+  4      Profit_Per Number,
+  5      Unit VARCHAR(20),
+  6      Qty_Hand Number,
+  7      ReOrder Number,
+  8      Sell_P Number(10, 2),
+  9      Cost_P Number(10, 2)
+ 10  );
+    Desc VARCHAR(50),
+    *
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> CREATE TABLE Products (
+  2      P_No VARCHAR(10) PRIMARY KEY CHECK (P_No LIKE 'P%'),
+  3      Descr VARCHAR(50),
+  4      Profit_Per Number,
+  5      Unit VARCHAR(20),
+  6      Qty_Hand Number,
+  7      ReOrder Number,
+  8      Sell_P Number(10, 2),
+  9      Cost_P Number(10, 2)
+ 10  );
+
+Table created.
+
+SQL> 
+SQL> desc Product_Master;
+ERROR:
+ORA-04043: object Product_Master does not exist
+
+
+SQL> CREATE TABLE Product_Master (
+  2      P_No VARCHAR(10) PRIMARY KEY CHECK (P_No LIKE 'P%'),
+  3      Descr VARCHAR(50),
+  4      Profit_Per Number,
+  5      Unit VARCHAR(20),
+  6      Qty_Hand Number,
+  7      ReOrder Number,
+  8      Sell_P Number(10, 2),
+  9      Cost_P Number(10, 2)
+ 10  );
+
+Table created.
+
+SQL> 
+SQL> desc Product_Master;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ P_NO                                                  NOT NULL VARCHAR2(10)
+ DESCR                                                          VARCHAR2(50)
+ PROFIT_PER                                                     NUMBER
+ UNIT                                                           VARCHAR2(20)
+ QTY_HAND                                                       NUMBER
+ REORDER                                                        NUMBER
+ SELL_P                                                         NUMBER(10,2)
+ COST_P                                                         NUMBER(10,2)
+
+SQL> desc Client_Master;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ C_NO                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                           NOT NULL VARCHAR2(25)
+ PINCODE                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                            NOT NULL DATE
+ OCCUPATION                                            NOT NULL VARCHAR2(15)
+
+SQL> select * from Client_Master;
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-87 Manager
+C002 Vraj Shah                     380058 20-NOV-86 CEO
+C003 Dhyan Dave                    387903 17-JUN-88 Doctor
+C004 Mira Vaid                     398006 05-JAN-76 Professor
+C005 Preeti Patel                  390040 28-FEB-71 Clerk
+
+SQL> rop table Client_Mater;
+SP2-0734: unknown command beginning "rop table ..." - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Client_Master
+SQL> drop table Client_Master;
+
+Table dropped.
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key CHECK (Client_No LIKE 'C%'),
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8  );
+ C_No varchar(4) primary key CHECK (Client_No LIKE 'C%'),
+                                                        *
+ERROR at line 3:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> 
+SQL> insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1987','dd-mm-yyyy'),
+'Manager');
+insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1987','dd-mm-yyyy'),'Mana
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1986','dd-mm-yyyy'),
+'CEO');
+insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1986','dd-mm-yyyy'),'CEO'
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into Client_Master Values('C003','Dhyan Dave',387903,to_date('17-june-1988','dd-mm-yyyy'
+),'Doctor');
+insert into Client_Master Values('C003','Dhyan Dave',387903,to_date('17-june-1988','dd-mm-yyyy'),'Do
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into Client_Master Values('C004','Mira Vaid',398006,to_date('5-jan-1976','dd-mm-yyyy'),'
+Professor');
+insert into Client_Master Values('C004','Mira Vaid',398006,to_date('5-jan-1976','dd-mm-yyyy'),'Profe
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy
+'),'Clerk');
+insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy'),'C
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key CHECK (Client_No LIKE 'C%'),
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8  );
+ C_No varchar(4) primary key CHECK (Client_No LIKE 'C%'),
+                                                        *
+ERROR at line 3:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> CREATE TABLE Client_Master
+  2  (
+  3   C_No varchar(4) primary key CHECK (C_No LIKE 'C%'),
+  4   Client_Name varchar(25) not null,
+  5   Pincode Number(6) not null,
+  6   Birth_Date Date not null,
+  7   Occupation varchar(15) not null
+  8  );
+
+Table created.
+
+SQL> 
+SQL> insert into Client_Master Values('C001','Kajal Oza',380036,to_date('9-july-1987','dd-mm-yyyy'),
+'Manager');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C002','Vraj Shah',380058,to_date('20-nov-1986','dd-mm-yyyy'),
+'CEO');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C003','Dhyan Dave',387903,to_date('17-june-1988','dd-mm-yyyy'
+),'Doctor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C004','Mira Vaid',398006,to_date('5-jan-1976','dd-mm-yyyy'),'
+Professor');
+
+1 row created.
+
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy
+'),'Clerk');select * from Client_Master;
+insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy'),'C
+                                                                                                    
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> 
+SQL> insert into Client_Master Values('C005','Preeti Patel',390040,to_date('28-feb-1971','dd-mm-yyyy
+'),'Clerk');
+
+1 row created.
+
+SQL> select * from Client_Masterl;
+select * from Client_Masterl
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Client_Master
+SQL> /
+
+C_NO CLIENT_NAME                  PINCODE BIRTH_DAT OCCUPATION
+---- ------------------------- ---------- --------- ---------------
+C001 Kajal Oza                     380036 09-JUL-87 Manager
+C002 Vraj Shah                     380058 20-NOV-86 CEO
+C003 Dhyan Dave                    387903 17-JUN-88 Doctor
+C004 Mira Vaid                     398006 05-JAN-76 Professor
+C005 Preeti Patel                  390040 28-FEB-71 Clerk
+
+SQL> desc Client_Master;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ C_NO                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                           NOT NULL VARCHAR2(25)
+ PINCODE                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                            NOT NULL DATE
+ OCCUPATION                                            NOT NULL VARCHAR2(15)
+
+SQL> desc Product_Master;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ P_NO                                                  NOT NULL VARCHAR2(10)
+ DESCR                                                          VARCHAR2(50)
+ PROFIT_PER                                                     NUMBER
+ UNIT                                                           VARCHAR2(20)
+ QTY_HAND                                                       NUMBER
+ REORDER                                                        NUMBER
+ SELL_P                                                         NUMBER(10,2)
+ COST_P                                                         NUMBER(10,2)
+
+SQL> select * from Product_Master;
+
+no rows selected
+
+SQL> INSERT INTO Product_Master (P_No, Descr, Profit_Per, Unit, Qty_Hand, ReOrder, Sell_P, Cost_P) 
+  2  VALUES
+  3  ('P001', 'T-Shirt', 5, 'Piece', 200, 50, 350.00, 250.00),
+  4  ('P002', 'Jeans', 6, 'Piece', 150, 40, 500.00, 350.00),
+  5  ('P003', 'Skirt', 6, 'Piece', 100, 50, 350.00, 200.00),
+  6  ('P004', 'Saree', 3, 'Piece', 100, 20, 800.00, 600.00);
+('P001', 'T-Shirt', 5, 'Piece', 200, 50, 350.00, 250.00),
+                                                        *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Product_Master VALUES ('P001', 'T-Shirt', 5, 'Piece', 200, 50, 350.00, 250.00);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P002', 'Jeans', 6, 'Piece', 150, 40, 500.00, 350.00);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P003', 'Skirt', 6, 'Piece', 100, 50, 350.00, 200.00);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P004', 'Saree', 3, 'Piece', 100, 20, 800.00, 600.00);
+
+1 row created.
+
+SQL> select * from Product_Master;
+
+P_NO       DESCR                                              PROFIT_PER UNIT
+---------- -------------------------------------------------- ---------- --------------------
+  QTY_HAND    REORDER     SELL_P     COST_P
+---------- ---------- ---------- ----------
+P001       T-Shirt                                                     5 Piece
+       200         50        350        250
+
+P002       Jeans                                                       6 Piece
+       150         40        500        350
+
+P003       Skirt                                                       6 Piece
+       100         50        350        200
+
+P004       Saree                                                       3 Piece
+       100         20        800        600
+
+
+SQL> set lines 100;
+SQL> set pages 100;
+SQL> select * from Product_Master;
+
+P_NO       DESCR                                              PROFIT_PER UNIT
+---------- -------------------------------------------------- ---------- --------------------
+  QTY_HAND    REORDER     SELL_P     COST_P
+---------- ---------- ---------- ----------
+P001       T-Shirt                                                     5 Piece
+       200         50        350        250
+
+P002       Jeans                                                       6 Piece
+       150         40        500        350
+
+P003       Skirt                                                       6 Piece
+       100         50        350        200
+
+P004       Saree                                                       3 Piece
+       100         20        800        600
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

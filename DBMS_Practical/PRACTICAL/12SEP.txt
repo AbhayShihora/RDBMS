@@ -1,0 +1,327 @@
+//Date- 12 September 2025
+
+SQL> desc Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                            NUMBER(3)
+ NAME                                               VARCHAR2(25)
+ AGE                                                NUMBER(3)
+
+SQL> select * from Student;
+
+   ROLL_NO NAME                             AGE
+---------- ------------------------- ----------
+        27 Abhay Shihora                     21
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Student
+SQL> INSERT INTO TABLE Student(27,'Abhay Shihora',21);
+INSERT INTO TABLE Student(27,'Abhay Shihora',21)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> INSERT INTO Stud values(27,'Abhay Shihora',21);
+INSERT INTO Stud values(27,'Abhay Shihora',21)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Student values(1,'A',22)
+SQL> /
+
+1 row created.
+
+SQL> insert into Student values(&roll_no,'&name',&age);
+Enter value for roll_no: 2
+Enter value for name: B
+Enter value for age: 24
+old   1: insert into Student values(&roll_no,'&name',&age)
+new   1: insert into Student values(2,'B',24)
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* insert into Student values(&roll_no,'&name',&age)
+SQL> \
+SP2-0042: unknown command "\" - rest of line ignored.
+SQL> /
+Enter value for roll_no: 3
+Enter value for name: C
+Enter value for age: 25
+old   1: insert into Student values(&roll_no,'&name',&age)
+new   1: insert into Student values(3,'C',25)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 4
+Enter value for name: D
+Enter value for age: 21
+old   1: insert into Student values(&roll_no,'&name',&age)
+new   1: insert into Student values(4,'D',21)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 5
+Enter value for name: E
+Enter value for age: 19
+old   1: insert into Student values(&roll_no,'&name',&age)
+new   1: insert into Student values(5,'E',19)
+
+1 row created.
+
+SQL> select * from Student;
+
+   ROLL_NO NAME                             AGE
+---------- ------------------------- ----------
+        27 Abhay Shihora                     21
+         1 A                                 22
+         2 B                                 24
+         3 C                                 25
+         4 D                                 21
+         5 E                                 19
+
+6 rows selected.
+
+SQL> select * from student asc;
+select * from student asc
+                      *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from Student order by roll_no;
+
+   ROLL_NO NAME                             AGE
+---------- ------------------------- ----------
+         1 A                                 22
+         2 B                                 24
+         3 C                                 25
+         4 D                                 21
+         5 E                                 19
+        27 Abhay Shihora                     21
+
+6 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Student order by roll_no
+SQL> /
+
+   ROLL_NO NAME                             AGE
+---------- ------------------------- ----------
+         1 A                                 22
+         2 B                                 24
+         3 C                                 25
+         4 D                                 21
+         5 E                                 19
+        27 Abhay Shihora                     21
+
+6 rows selected.
+
+SQL> create table student1(rollno number(3) primary key,name varchar(20),age  number(3));
+
+Table created.
+
+SQL> INSERT INTO Student1 values(27,'Abhay Shihora',21);
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Student1 values(27,'Abhay Shihora',21)
+SQL> /
+INSERT INTO Student1 values(27,'Abhay Shihora',21)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCAE250027.SYS_C0036723) violated
+
+
+SQL> insert into Student1 values(&roll_no,'&name',&age);
+Enter value for roll_no: 1
+Enter value for name: A
+Enter value for age: 21
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(1,'A',21)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 2
+Enter value for name: B
+Enter value for age: 23
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(2,'B',23)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 3
+Enter value for name: C
+Enter value for age: 34
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(3,'C',34)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: D
+Enter value for name: 32
+Enter value for age: 12
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(D,'32',12)
+insert into Student1 values(D,'32',12)
+                            *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> /
+Enter value for roll_no: 4
+Enter value for name: D
+Enter value for age: 34
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(4,'D',34)
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 5
+Enter value for name: E
+Enter value for age: 56
+old   1: insert into Student1 values(&roll_no,'&name',&age)
+new   1: insert into Student1 values(5,'E',56)
+
+1 row created.
+
+SQL> select * from Student1;
+
+    ROLLNO NAME                        AGE
+---------- -------------------- ----------
+        27 Abhay Shihora                21
+         1 A                            21
+         2 B                            23
+         3 C                            34
+         4 D                            34
+         5 E                            56
+
+6 rows selected.
+
+SQL>  create table lj_garba(rollno number(3) references student1(roll_no),name varchar(20));
+ create table lj_garba(rollno number(3) references student1(roll_no),name varchar(20))
+                                                            *
+ERROR at line 1:
+ORA-00904: "ROLL_NO": invalid identifier
+
+
+SQL>  create table lj_garba(rollno number(3) references student1(rollno),name varchar(20));
+
+Table created.
+
+SQL> desc lj_garba;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(3)
+ NAME                                               VARCHAR2(20)
+
+SQL> insert into lj_garba values(&roll_no,'&name');
+Enter value for roll_no: 1
+Enter value for name: A
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(1,'A')
+
+1 row created.
+
+SQL> 2
+SP2-0226: Invalid line number
+SQL> /
+Enter value for roll_no: 2
+Enter value for name: B
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(2,'B')
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 3
+Enter value for name: C
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(3,'C')
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: D
+Enter value for name: d
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(D,'d')
+insert into lj_garba values(D,'d')
+                            *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> /
+Enter value for roll_no: 4
+Enter value for name: D
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(4,'D')
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 5
+Enter value for name: E
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(5,'E')
+
+1 row created.
+
+SQL> /
+Enter value for roll_no: 6
+Enter value for name: DS
+old   1: insert into lj_garba values(&roll_no,'&name')
+new   1: insert into lj_garba values(6,'DS')
+insert into lj_garba values(6,'DS')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCAE250027.SYS_C0036846) violated - parent key
+not found
+
+
+SQL> select * from lj
+  2  _garba;
+_garba
+*
+ERROR at line 2:
+ORA-00911: invalid character
+
+
+SQL> select * from lj_garba;
+
+    ROLLNO NAME
+---------- --------------------
+         1 A
+         2 B
+         3 C
+         4 D
+         5 E
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

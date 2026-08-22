@@ -1,0 +1,14 @@
+CTR + L --> Clear Screen
+use DATABASE_NAME  -->  Create Database 
+show collectons  --> List of Tables
+db.CreateCollection("TableName")  -->  Create Table 
+db.tableName.find()  --> show table data 
+db.TableName.insert(
+    {
+        _id:1,    --> Object Id for Uniquely Identify
+        ....,
+        ....,
+        ....,
+        Hobby :["   ","   "]
+    }
+)

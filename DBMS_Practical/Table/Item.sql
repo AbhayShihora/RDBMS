@@ -1,0 +1,12 @@
+CREATE TABLE Item (
+    Item_No   VARCHAR2(5) PRIMARY KEY CHECK (Item_No LIKE 'I%'),
+    Item_Name VARCHAR2(30) NOT NULL,
+    Price     NUMBER(8,2) NOT NULL CHECK (Price > 0),
+    Weight    NUMBER(8,2) NOT NULL CHECK (Weight > 0)
+);
+
+INSERT INTO Item VALUES ('I001','Rice',50,5);
+INSERT INTO Item VALUES ('I002','Wheat',40,4);
+INSERT INTO Item VALUES ('I003','Sugar',35,3);
+INSERT INTO Item VALUES ('I004','Oil',120,2);
+INSERT INTO Item VALUES ('I005','Salt',20,1);

@@ -1,0 +1,30 @@
+
+db.Abhay.insert(
+    {
+        _id:1,
+        Rollno:27,
+        Name:"Abhay Shihora",
+        Mobile:9924636898,
+        Hobby:["Cricket","Chess"]
+    }
+)
+
+db.Abhay.insert(
+    {
+        _id:2,
+        Rollno:53,
+        Name:"Darsha Shah",
+        Mobile:1234567890,
+        Hobby:["Running","Hockey"]
+    }
+)
+
+db.Abhay.insert(
+    {
+        _id:3,
+        Rollno:14,
+        Name:"Khushal Div",
+        Mobile:9878065432,
+        Hobby:["Gaming","Drinking"]
+    }
+)

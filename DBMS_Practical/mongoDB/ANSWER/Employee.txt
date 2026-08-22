@@ -1,0 +1,81 @@
+
+
+-->db.createCollection("Employee_Master")
+
+db.employee.insertMany([
+    { 
+        _id:1,
+        firstName: "John",
+        lastName: "King",
+        email: "john.king@abc.com",
+        salary: 5000,
+        skills: [ "Angular", "React", "MongoDB" ]
+    },
+    { 
+        _id:2,
+        firstName: "Sachin",
+        lastName: "T",
+        email: "sachin.t@abc.com",
+        salary: 8000,
+        skills: [ "Accounting", "Tax" ]
+    },
+    { 
+        _id:3,
+        firstName: "James",
+        lastName: "Bond",
+        email: "jamesb@abc.com",
+        salary: 7500,
+        skills: [ "Sales", "Marketing" ]
+    },
+    { 
+        _id:4,
+        firstName: "Steve",
+        lastName: "J",
+        email: "steve.j@abc.com",
+        salary: 7000,
+        skills: [ "Mac", "Marketing", "Product Design" ]
+    },
+    { 
+        _id:5,
+        firstName: "Kapil",
+        lastName: "D",
+        email: "kapil.d@abc.com",
+        salary: 4500,
+        skills: [ "Accounting", "Tax", "Sales" ]
+    },
+    { 
+        _id:6,
+        firstName: "Amitabh",
+        lastName: "B",
+        email: "amitabh.b@abc.com",
+        salary: 7000,
+        skills: [ "Marketing", "Tax"]
+    }
+])
+
+---------------------------------------
+QUERIES
+---------------------------------------
+
+Update element in all perticuler space(with where clause)
+ --> db.employee.updateMany({"skills" :"Accounting"},{$set:{"skills.$" :"ACC"}})
+
+
+Add new Element in perticuler space
+ --> db.employee.updateMany({_id:6},{$push:{"skills" :"GST"}})
+
+ Add new Element in All records
+ --> db.employee.updateMany({},{$push:{"skills":{$each:["GST","Cricket"]}}})
+
+
+ Add new element where does not exist
+ -->db.employee.updateMany({},{$addToSet:{"skills":"ACC"}})
+
+ Remove last element
+ -->db.employee.updateMany({},{$pop:{"skills":1}})
+
+ Remove first element
+ -->db.employee.updateMany({},{$pop:{"skills":-1}})
+
+ Remove "GST" element
+ -->db.employee.updateMany({},{$pull:{"skills":"GST"}})

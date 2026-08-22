@@ -1,0 +1,106 @@
+Create “Mymenu” database with a collection called “Restaurants”, containing documents with some or all of the following fields: Restaurant Id, Restaurant Name, Grades (Note: An array is expected), Cuisine, Address (Note: Must include Building Name, Street, Area, City, ZipCode), and Date of Establishment (Note: Use Proper Date format), Score and Rating. Perform the following operations on the database. (Insert at least 10 documents)
+-->use Mymenu
+
+-->db.createCollection("Restaurants")
+
+db.Restaurants.insert(
+{ "_id" : 1,
+ "RestaurantId" : 1, 
+ "RestaurantName" : "Mirch Masala",
+ "Grades" : [ "A", "A+" ],
+ "Cuisine" : "Kitchen King", 
+ "Address" : [ { "BuildingName" : "Himalaya",
+				"Street" : "Vastrapur",
+				"Area" : "Vastrapur Lake", 
+				"City" : "Ahmedabad",
+				"ZipCode" : 380052 } ],
+  "DateofEstablishment" : "1-Jan-2008", 
+  "Score" : 90, 
+  "Rating" : 4.9 
+  })
+  
+  
+  
+db.Restaurants.insert([
+{
+	 "_id" : 2,
+	 "RestaurantId" : 2, 
+	 "RestaurantName" : "Jassi De Parathe",
+	 "Grades" : [ "A" ],
+	 "Cuisine" : "Kitchen Masala",
+	 "Address" : [ { "BuildingName" : "Sarkhej", "Street" : "Maninagar", "Area" : "Kankaria Lake", "City" : "Ahmedabad", "ZipCode" : 380052 } ], 
+	"DateofEstablishment" : "1-Jan-2008", 
+	"Score" : 40, 
+	"Rating" : 3.9 
+},
+
+{ "_id" : 3, "RestaurantId" : 4, "RestaurantName" : "Nini's Kitchen", "Grades" : [ "A" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Saket-II", "Street" : "Abc", "Area" : "Science City", "City" : "Baroda", "ZipCode" : 380051 } ], "DateofEstablishment" : "1-Jan-2008", "Score" : 40, "Rating" : 3.9 },
+
+{ "_id" : 4, "RestaurantId" : 3, "RestaurantName" : "Barbeque Nation", "Grades" : [ "C" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Memnagar", "Street" : "Maninagar", "Area" : "Iskon", "City" : "Surat", "ZipCode" : 380052 } ], "DateofEstablishment" : "1-Jan-2008", "Score" : 40, "Rating" : 3.9 },
+
+{ "_id" : 5, "RestaurantId" : 5, "RestaurantName" : "Nini's Kitchen", "Grades" : [ "A" ], "Cuisine" : "Multi Cuisine", "Address" : [ { "BuildingName" : "Saket-II", "Street" : "Abc", "Area" : "Science City", "City" : "Baroda", "ZipCode" : 380051 } ], "DateofEstablishment" : "1-Jan-2024", "Score" : 40, "Rating" : 3.9 }
+])
+
+-------------------------------------------------------------------------------------
+1. Find the Restaurant Names, who have established after January 2010.
+-->db.Restaurants.find({DateofEstablishment:{$gt:"1-Jan-2010"}},{RestaurantName:1,_id:0})
+
+    > db.Restaurants.find({DateofEstablishment:{$gt:"1-Jan-2010"}},{RestaurantName:1,_id:0})
+    { "RestaurantName" : "Nini's Kitchen" }
+
+
+-------------------------------------------------------------------------------------
+2. Find the restaurants that do not prepare Cuisine of “Kitchen Masala”, and their Score is more than 70.
+-->db.Restaurants.find({Cuisine:{$ne:{$regex:"Kitchen Masala"}}})
+-->db.Restaurants.find({Score:{$gt:70}})
+-->db.Restaurants.find({$and:[{Cuisine:{$ne:{$regex:"Kitchen Masala"}}},{Score:{$gt:70}}]})
+
+   > db.Restaurants.find({$and:[{Cuisine:{$ne:{$regex:"Kitchen Masala"}}},{Score:{$gt:70}}]})
+    { "_id" : 1, "RestaurantId" : 1, "RestaurantName" : "Mirch Masala", "Grades" : [ "A", "A+" ], "Cuisine" : "Kitchen King", "Address" : [ { "BuildingName" : "Himalaya", "Street" : "Vastrapur", "Area" : "Vastrapur Lake", "City" : "Ahmedabad", "ZipCode" : 380052 } ], "DateofEstablishment" : "1-Jan-2008", "Score" : 90, "Rating" : 4.5 }
+
+
+-------------------------------------------------------------------------------------
+3. Update the Rating of the restaurant “Mirch Masala”.
+-->db.Restaurants.find({RestaurantName:{$regex:"Mirch Masala",$options:"i"}},{Rating:1})
+-->db.Restaurants.update({RestaurantName:{$regex:"Mirch Masala",$options:"i"}},{$set:{Rating:4.5}})
+   
+    > db.Restaurants.update({RestaurantName:{$regex:"Mirch Masala",$options:"i"}},{$set:{Rating:4.5}})
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+    
+
+-------------------------------------------------------------------------------------
+4. Display the restaurants, which are located in “Ahmedabad”.
+-->db.Restaurants.find({"Address.City":"Ahmedabad"},{_id:0,RestaurantName:1})
+
+    > db.Restaurants.find({"Address.City":"Ahmedabad"},{_id:0,RestaurantName:1})
+    { "RestaurantName" : "Mirch Masala" }
+    { "RestaurantName" : "Jassi De Parathe" }
+        
+-------------------------------------------------------------------------------------
+5. Find the Restaurant Names and Cuisine, for those restaurants which contain ‘chen’ (Example: “Kitchen”) as the last three letters.
+-->db.Restaurants.find({},{_id:0,Cuisine:1,RestaurantName:1})
+-->db.Restaurants.find({RestaurantName:{$regex:"chen$",$options:"i"}},{_id:0,Cuisine:1,RestaurantName:1})
+
+    > db.Restaurants.find({RestaurantName:{$regex:"chen$",$options:"i"}},{_id:0,Cuisine:1,RestaurantName:1})
+    { "RestaurantName" : "Nini's Kitchen", "Cuisine" : "Multi Cuisine" }
+    { "RestaurantName" : "Nini's Kitchen", "Cuisine" : "Multi Cuisine" }
+
+-------------------------------------------------------------------------------------
+6. Find the Restaurant Id’s and Restaurant Names of those restaurants, which are situated in “Ahmedabad” (City) but not in “ISKON” (Area).
+-->db.Restaurants.find({},{RestaurantId:1,RestaurantName:1,_id:0})
+-->db.Restaurants.find({"Address.City":"Ahmedabad"},{_id:0,RestaurantName:1})
+-->db.Restaurants.find({"Address.Area":{$not:{$regex:"Iskon",$options:"i"}}},{_id:0,RestaurantName:1})
+
+
+*************
+--->db.Restaurants.find({$and:[{"Address.City":"Ahmedabad"},{"Address.Area":{$not:{$regex:"Iskon",$options:"i"}}},{_id:0,RestaurantName:1}},{RestaurantId:1,RestaurantName:1,_id:0}]})
+-------------------------------------------------------------------------------------
+7. Add a field “Borough” with value “Bronx”, for restaurants with _id: 3 and 4.
+
+-------------------------------------------------------------------------------------
+8. Remove the field Cuisine for restaurants whose name is “Jassi De Paratha”.
+
+-------------------------------------------------------------------------------------
+Remove the document, with restaurant named “Barbeque Nation”.
+
+-------------------------------------------------------------------------------------
